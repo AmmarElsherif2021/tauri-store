@@ -5,3 +5,12 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafb);
 }
+.container{
+  
+  height:90%;
+}
+.row{
+  
+  justify-content: space-between;
+  
+}
