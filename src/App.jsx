@@ -5,9 +5,11 @@ import Login from './Container/Login';
 import { BrowserRouter,Routes, Route} from 'react-router-dom';
 import Dashboard from './Dashboard/Dashboard';
 import Preferences from './Preferences/Preferences';
+import useToken from './useToken';
 
 function App() {
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
+  //const [token, setToken] = useState();
   if(!token) {
     return <Login setToken={setToken} />
   }
