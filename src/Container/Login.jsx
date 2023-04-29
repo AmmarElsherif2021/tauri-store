@@ -26,7 +26,7 @@ export default function Login() {
     return (
   
       <div className="Login">
-        <h1> login </h1>
+        <h1>Login please</h1>
         <Form onSubmit={handleSubmit} className='form'>
   
           <Form.Group size="lg" controlId="email" className='form-group'>
