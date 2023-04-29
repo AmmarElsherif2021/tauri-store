@@ -26,12 +26,12 @@ export default function Login() {
     return (
   
       <div className="Login">
+        <h1> login </h1>
+        <Form onSubmit={handleSubmit} className='form'>
   
-        <Form onSubmit={handleSubmit}>
+          <Form.Group size="lg" controlId="email" className='form-group'>
   
-          <Form.Group size="lg" controlId="email">
-  
-            <Form.Label>Email</Form.Label>
+            <Form.Label className='label'>Email  </Form.Label>
   
             <Form.Control
   
@@ -42,14 +42,15 @@ export default function Login() {
               value={email}
   
               onChange={(e) => setEmail(e.target.value)}
-  
+              
+              className='input'
             />
   
           </Form.Group>
   
-          <Form.Group size="lg" controlId="password">
+          <Form.Group size="lg" controlId="password" className='form-group'>
   
-            <Form.Label>Password</Form.Label>
+            <Form.Label className='label'>Password</Form.Label>
   
             <Form.Control
   
@@ -63,7 +64,7 @@ export default function Login() {
   
           </Form.Group>
   
-          <Button block size="lg" type="submit" disabled={!validateForm()}>
+          <Button block size="lg" type="submit" disabled={!validateForm()} className='button'>
   
             Login
   

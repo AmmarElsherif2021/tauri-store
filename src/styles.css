@@ -6,7 +6,7 @@
 
   color: #0f0f0f;
   background-color: #f6f6f6;
-
+  height:100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,7 +16,7 @@
 
 .container {
   margin: 0;
-  padding-top: 10vh;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;

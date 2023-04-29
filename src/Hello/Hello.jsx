@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import Card from "../layouts/Card";
 export default function Hello(){
     const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+    const [name, setName] = useState("");
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command

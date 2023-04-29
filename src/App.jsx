@@ -1,12 +1,14 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/tauri";
-import Card from "./layouts/Card";
+import React from "react";
+//import Hello from "./Hello/Hello";
+import Login from "./Container/Login";
 import "./App.css";
 //simport { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Login from "./Container/Login";
+
+
 function App() {
-  <Login/>
+  return (<div className='app'>
+    <Login/>
+  </div>)
 }
 
 export default App;
