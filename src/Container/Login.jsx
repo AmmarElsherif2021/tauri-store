@@ -3,9 +3,21 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 import Button from "react-bootstrap/Button";
-
+import PropTypes from 'prop-types';
 import "./Login.css";
-export default function Login() {
+async function loginUser(credentials) {
+  return fetch('http://localhost:8080/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
+ 
+ 
+export default function Login({ setToken }) {
 
     const [email, setEmail] = useState("");
   
@@ -17,10 +29,13 @@ export default function Login() {
   
     }
   
-    function handleSubmit(event) {
-  
-      event.preventDefault();
-  
+    const handleSubmit =async e => {
+      e.preventDefault();
+      const token = await loginUser({
+        username,
+        password
+      });
+      setToken(token);
     }
   
     return (
@@ -76,4 +91,7 @@ export default function Login() {
   
     );
   
+  }
+  Login.propTypes = {
+    setToken: PropTypes.func.isRequired
   }

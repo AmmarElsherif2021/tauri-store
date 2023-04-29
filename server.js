@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 
-app.use('/login', (req, res) => {
+app.use('/Login', (req, res) => {
 
   res.send({
 
