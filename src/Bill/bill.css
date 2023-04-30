@@ -1,16 +1,36 @@
 .bill{
-    background:red;
+    background:rebeccapurple;
     justify-content: center;
     padding-left:15%;
+    background: none;
+    height:80%;
 }
 ul{
-    border: 2px #0af solid;
+    border: 2px  solid none;
     border-radius: 9px;
     display:flex;
     flex-direction:row;
-    margin: 20px;
-    background-color: "#efefef";
-    padding: 6 px;
+    margin: 2px;
+    
+    padding: 5 px;
     list-style-type: none;
-    justify-content: space-evenly;
+    justify-content:first baseline;
+    background: none;
+    width: 740px;
+}
+li{
+    min-width:150px;
+    max-width: 151px;
+    padding: 5px;
+    margin: 10px;
+    background: none;
+}
+
+.note-root{
+border: none;
+border-radius: 9;
+margin: 10px;
+padding: 6px;
+background: none;
+width: 800px;
 }

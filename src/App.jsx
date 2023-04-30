@@ -25,16 +25,16 @@ function App() {
     
       <BrowserRouter>
 
-        <button>
-          <Link to="/Hello" >Home </Link>
-        </button>
+        
+          <Link to="/Hello" ><button>Home</button> </Link>
+       
 
         <Routes>
            
           <Route  path="/"  forceRefersh={true} element={<Hero/>}/>
-          <Route  path="/Hello"  element={<Hello/>}/>
-          <Route path="/Bill" element={<Bill/>}/>
-          <Route path="/AddCarpet" element={<AddCarpet/>}/>
+          <Route  path="Hello"  element={<Hello/>}/>
+          <Route path="Bill" element={<Bill/>}/>
+          <Route path="AddCarpet" element={<AddCarpet/>}/>
         </Routes>
       </BrowserRouter>
     </div>

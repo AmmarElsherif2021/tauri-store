@@ -37,7 +37,7 @@
 .row {
   display: flex;
   justify-content: center;
-  background:yellow;
+  background:none;
   min-height:200px;
   align-items: center;
 
