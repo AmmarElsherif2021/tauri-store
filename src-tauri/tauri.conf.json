@@ -31,7 +31,10 @@
       "targets": "all"
     },
     "security": {
-      "csp": null
+      "csp": {
+        "default-src": ["'none'"]
+      }
+      
     },
     "updater": {
       "active": false

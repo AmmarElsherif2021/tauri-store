@@ -1,24 +1,59 @@
 import React, { useState } from "react";
 import Card from "../layouts/Card";
+//import avatar from '../assets/avatar.png'
+import addBill from '../assets/add-bill.png'
+import history from '../assets/history.png'
+import addDatabase from '../assets/add-database.png'
+import { Link, Outlet } from "react-router-dom"
+import Hero from "./Hero/Hero";
 export default function Hello(){
     const [greetMsg, setGreetMsg] = useState("");
     const [name, setName] = useState("");
+
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
     setGreetMsg(await invoke("greet", { name }));
   }
-  const imgs=["/vite.svg","/tauri.svg","/vite.svg"]
-  const urls=["https://vitejs.dev","https://tauri.app","https://reactjs.org"]
+  const data=[
+    {
+        id: 1,
+        title: "New bill",
+        path:'/Bill',
+        coverImg: addBill,
+        
+    },
+    {
+        id: 2,
+        title: "Add new carpet",
+        path:'/AddCarpet',
+        coverImg: addDatabase,
+        
+    },
+    {
+        id: 3,
+        title: "Get history",
+        path: '/',
+        coverImg: history,
+        
+    }
+  ]
+  const cards=data.map((x)=>{
+    return(
+       <Link className="card-item" to={x.path}>
+       <Card urlPath={x.path} imgPath={x.coverImg} />
+       </Link>
+        
+        )
+})
   return (
     
     <div className="container">
-    <h1>Welcome to Tauri!</h1>
+    
+    <Hero/>
 
     <div className="row">
-      <Card urlPath={urls[0]} imgPath={imgs[0]} />
-      <Card urlPath={urls[1]} imgPath={imgs[1]} />
-      <Card urlPath={urls[2]} imgPath={imgs[2]} />
+      {cards}
     </div>
 
     <p>Click on the Tauri, Vite, and React logos to learn more.</p>
