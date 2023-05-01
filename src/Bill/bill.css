@@ -1,36 +1,70 @@
 .bill{
-    background:rebeccapurple;
+    background:rgb(123, 93, 153);
+    
     justify-content: center;
     padding-left:15%;
     background: none;
-    height:80%;
+    height:50%;
+    width:740px;
 }
-ul{
+
+.header {
+        display: flex;
+        flex-direction: row;
+
+        width:700px
+    }
+       
+     .store_info{
+        background-color: none; 
+        flex:0.75;
+        
+     }
+     .client_info {
+     
+        background-color: none; 
+        flex:0.75;
+        
+     }
+     .hero {
+     
+        background-color: none; 
+        flex:1.5;
+        
+     }
+    
+    .bill_body{
+      background: none;
+
+      height:auto;
+      margin-top:3px;
+      width:700px;
+    }
+     .note_list{
     border: 2px  solid none;
     border-radius: 9px;
     display:flex;
     flex-direction:row;
-    margin: 2px;
-    
-    padding: 5 px;
     list-style-type: none;
     justify-content:first baseline;
     background: none;
-    width: 740px;
+    width: 700px;
 }
 li{
-    min-width:150px;
-    max-width: 151px;
+    width: 120px;
+    max-width: 121px;
     padding: 5px;
-    margin: 10px;
-    background: none;
+    margin: 5px;
+
+    list-style-type: none;
+    overflow-wrap: break-word;
 }
 
 .note-root{
 border: none;
 border-radius: 9;
-margin: 10px;
-padding: 6px;
+margin: 2px;
+padding: 2px;
 background: none;
 width: 800px;
 }
