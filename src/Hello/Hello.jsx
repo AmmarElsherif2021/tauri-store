@@ -46,6 +46,10 @@ export default function Hello(){
         
         )
 })
+
+ 
+
+
   return (
     
     <div className="container">
@@ -56,7 +60,7 @@ export default function Hello(){
       {cards}
     </div>
 
-    <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+    <p>.......</p>
 
     <div className="row">
       <form
