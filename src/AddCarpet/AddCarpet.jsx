@@ -1,8 +1,11 @@
 import './addCarpet.css'
 import React from 'react'
-//import './Carpets'
+import Carpets from './Carpets'
 export default function AddCarpet(props){
     return(
-        <h1>carpets</h1>
+       <div>
+         carpets
+         <Carpets/>
+       </div>
     )
-}
+} 

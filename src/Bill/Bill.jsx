@@ -25,7 +25,7 @@ function BillKey(){
             <p>facebook: /hozifa_store</p>
             <p>whatsapp: +201158277488</p>
           </div>
-          <div className="hero"><h1> hi bill</h1></div>
+          <div className="hero"><h1>فاتورة</h1></div>
           <div className="client_info">
             <p>id: {bill_backData['id']} </p>
             <p>Date: {bill_backData['history']}</p>
