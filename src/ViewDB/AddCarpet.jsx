@@ -31,7 +31,8 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
 }
  
 //--------------------------------------------------------------
-  async function addCarpet() {
+  async function addCarpet(event) {
+    event.preventDefault()
     try {
 
       // Add the new Carpet!
@@ -114,7 +115,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     <button onClick={addCarpet} className='btn'>
       أضف
     </button>
-    <ViewDB/>
+   
     </div>
   )
 } 

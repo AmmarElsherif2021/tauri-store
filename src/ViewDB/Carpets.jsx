@@ -4,7 +4,7 @@ import Dexie from 'dexie';
 
 
 export const db = new Dexie('myDatabase');
-db.version(1).stores({
-  carpets: '++id, model,price_m ,W,L,size,t_price', // Primary key and indexed props
+db.version(3).stores({
+  carpets: '++id, model,price_m ,W,L,size,t_price' // Primary key and indexed props
 });
 

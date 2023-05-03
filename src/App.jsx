@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
 
         
-          <Link to="/Hello" ><button>Home</button> </Link>
+          <Link to="/Hello" > <button>Home</button> </Link>
        
 
         <Routes>

@@ -80,7 +80,5 @@ export default function Hello(){
 
     <p>{greetMsg}</p>
     </div>
-    
-    
   );
 }

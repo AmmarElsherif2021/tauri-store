@@ -1,14 +1,14 @@
 .add_db{
-    background: rgb(173, 173, 173);
+    background: rgb(207, 207, 207);
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
     align-items: center;
-    max-width:90%;
+    width:98%;
     height:70px;
-    margin-left: 5%;
-    margin-top: 5%;
+    margin:5px;
     padding:4px;
+    border-radius: 5px;
 }
 p{
     display: flex;
@@ -21,7 +21,7 @@ input{
 }
 .num{
     width:50px;
-    background: #d8d8d8;
+    background: #ffffff;
 }
 .status{
     background: #ff5252;
