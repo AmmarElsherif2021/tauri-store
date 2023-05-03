@@ -5,13 +5,17 @@ import { db } from "./Carpets";
 
 export default function CarpetsList() {
     
-    const [data, setData] = useState([]);
+    /*const [data, setData] = useState([]);
 
     useEffect(() => {
       db.carpets.toArray().then((result) => {
         setData(result);
       });
-    }, []);
+    }, []);*/
+
+    const data = useLiveQuery(() => {
+        return db.myDatabase.carpets.toArray()
+      });
     return (<div>
        <ul>
        {data?.map(carpet => <li key={carpet.id}>

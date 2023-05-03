@@ -18,12 +18,12 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
   function handleChange(event) {
     const {name, value} = event.target
     if(name=='W'){
-      setW(value) 
+      setW(Number(value)) 
     }
     else if(name=='L'){
-      setL(value)
+      setL(Number(value))
     }else if(name=='price_m'){
-      setprice_m(value)
+      setprice_m(Number(value))
     }
     setsize((prevS)=>prevS=W*L*0.0001)
     setT_price((prevP)=>prevP=size*price_m)
@@ -53,7 +53,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       setT_price(0);
       
     } catch (error) {
-      setStatus(`Failed to add ${model}`);
+      setStatus(`Failed to add ${model} ${error}`);
     }
   }
 
