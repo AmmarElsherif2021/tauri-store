@@ -1,5 +1,21 @@
-.db{
-    background: yellow;
-    width:200px;
-    height: 100px;
+.add_db{
+    background: rgb(173, 173, 173);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    width:80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    padding:4px;
+}
+input{
+    max-width: 110px;
+}
+.num{
+    width:50px;
+}
+.status{
+    background: #ff5252;
+    overflow-wrap: break-word;
+    padding:3px;
 }

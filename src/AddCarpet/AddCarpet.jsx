@@ -1,12 +1,9 @@
 import './addCarpet.css'
 import React from 'react'
-import Carpets from './Carpets'
+//import Carpets from './Carpets'
 import { useState } from 'react';
-import Dexie from 'dexie';
-const db = new Dexie('myDatabase');
-db.version(1).stores({
-  carpet: '++id, model, price_m ,W,L,size,t_price', // Primary key and indexed props
-});
+import {db} from './Carpets';
+import ViewDB from './ViewDB'
 export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     
   const [model, setmodel] = useState("");
@@ -21,19 +18,19 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
   function handleChange(event) {
     const {name, value} = event.target
     if(name=='W'){
-      setW((prevW)=>prevW=value) 
+      setW(value) 
     }
     else if(name=='L'){
-      setL((prevL)=>prevL=value)
+      setL(value)
     }else if(name=='price_m'){
-      setprice_m((prevP)=>prevP=value)
+      setprice_m(value)
     }
-    setsize((prevS)=>prevS=W*L)
+    setsize((prevS)=>prevS=W*L*0.0001)
     setT_price((prevP)=>prevP=size*price_m)
     
 }
  
-//----------------------------------------
+//--------------------------------------------------------------
   async function addCarpet() {
     try {
 
@@ -56,49 +53,59 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       setT_price(0);
       
     } catch (error) {
-      setStatus(`Failed to add ${model}: ${error}`);
+      setStatus(`Failed to add ${model}`);
     }
   }
 
   return (
-    <div>
-    <p>
-      {status}
-    </p>
+    <div className='add_db'>
     
+    <div className='status'>
+     <p>
+      {status}
+     </p>
+    </div>
+
+    :موديل
     <input
       type="text"
       value={model}
       onChange={ev => setmodel(ev.target.value)}
-    />موديل:
-    
+    />
+    :سعر المتر
     <input
       type="number"
       value={price_m}
       name='price_m'
       onChange={handleChange}
-    />:سعر المتر
+      className='num'
+    />
     
+    : عرض
     <input
-      type="float"
-      value={W*1.0}
+      type="number"
+      value={W}
       name='W'
       onChange={handleChange}
-    /> : عرض
-    
+      className='num'
+    />
+    :طول
     <input
-      type="float"
-      value={L*1.0}
+      type="number"
+      value={L}
       name='L'
       onChange={handleChange}
-    />:طول
-      <p>{size}: مساحة</p>
+      className='num'
+    />
+      <p>{size}: مساحة</p><br/>
+      
       <p>{t_price}: اجمالي السعر</p>
       
     
     <button onClick={addCarpet}>
       Add
     </button>
+    <ViewDB/>
     </div>
   )
 } 
