@@ -3,7 +3,7 @@ import React from 'react'
 //import Carpets from './Carpets'
 import { useState } from 'react';
 import {db} from './Carpets';
-import ViewDB from './ViewDB'
+//import ViewDB from './ViewDB'
 export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     
   const [model, setmodel] = useState("");
@@ -53,7 +53,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       setT_price(0);
       
     } catch (error) {
-      setStatus(`Failed to add ${model} ${error}`);
+      setStatus(`Failed to add ${model}`);
     }
   }
 
@@ -65,13 +65,15 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       {status}
      </p>
     </div>
-
+    <p>
     :موديل
     <input
       type="text"
       value={model}
       onChange={ev => setmodel(ev.target.value)}
     />
+    </p>
+    <p>
     :سعر المتر
     <input
       type="number"
@@ -80,7 +82,9 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       onChange={handleChange}
       className='num'
     />
+    </p>
     
+    <p>
     : عرض
     <input
       type="number"
@@ -89,6 +93,9 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       onChange={handleChange}
       className='num'
     />
+    </p>
+    
+    <p>
     :طول
     <input
       type="number"
@@ -97,13 +104,15 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       onChange={handleChange}
       className='num'
     />
+    </p>
+    
       <p>{size}: مساحة</p><br/>
       
       <p>{t_price}: اجمالي السعر</p>
       
     
-    <button onClick={addCarpet}>
-      Add
+    <button onClick={addCarpet} className='btn'>
+      أضف
     </button>
     <ViewDB/>
     </div>

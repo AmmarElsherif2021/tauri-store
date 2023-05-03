@@ -7,7 +7,7 @@ import Dashboard from './Dashboard/Dashboard';
 
 import Hello from './Hello/Hello'
 import Bill from './Bill/Bill';
-import AddCarpet from './AddCarpet/AddCarpet';
+import ViewDB from './ViewDB/ViewDB';
 import Preferences from './Preferences/Preferences';
 import Hero from './Hello/Hero/Hero';
 
@@ -35,7 +35,7 @@ function App() {
           <Route  path="/"  forceRefersh={true} element={<Hero/>}/>
           <Route  path="Hello"  element={<Hello/>}/>
           <Route path="Bill" element={<Bill/>}/>
-          <Route path="AddCarpet" element={<AddCarpet/>}/>
+          <Route path="ViewDB" element={<ViewDB/>}/>
         </Routes>
       </BrowserRouter>
     </div>

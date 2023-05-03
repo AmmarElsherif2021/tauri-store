@@ -1,0 +1,37 @@
+.add_db{
+    background: rgb(173, 173, 173);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+    max-width:90%;
+    height:70px;
+    margin-left: 5%;
+    margin-top: 5%;
+    padding:4px;
+}
+p{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+   
+}
+input{
+    max-width: 110px;
+}
+.num{
+    width:50px;
+    background: #d8d8d8;
+}
+.status{
+    background: #ff5252;
+    overflow-wrap:break-word;
+    padding:3px;
+    
+
+}
+.btn{
+    background: #000000;
+    color:white;
+    font-weight: bold;
+}

@@ -26,7 +26,7 @@ export default function Hello(){
     {
         id: 2,
         title: "Add new carpet",
-        path:'/AddCarpet',
+        path:'/ViewDB',
         coverImg: addDatabase,
         
     },
