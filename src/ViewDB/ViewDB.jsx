@@ -5,45 +5,42 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 import { db } from "./Carpets";
 import AddCarpet from "./AddCarpet";
+import minus from './minus.png'
 import avatar from './column.png'
 export default function ViewDB() {
-    
-   /* const [data, setData] = useState([]);
-
-    useEffect(() => {
-      db.carpets.toArray().then((result) => {
-        setData(result);
-      });
-    }, []);*/
     const data = useLiveQuery(() => db.carpets.toArray(), []);
-    console.log(data)
+    
     if (!data){ return <div>Loading...</div>}
      
     function handleDelete(){
       db.delete().then(() => {
         console.log('Database deleted successfully');
       }).catch((err) => {
-        console.error('Error deleting database:', err);
+        console.log('Error deleting database:', err);
       });
-    }
-    /*
-    const data = useLiveQuery(() => {
-        return db.carpets.toArray()
-      });
-       <button onClick={handleDelete}>Del</button>
-      
-      */
-      
-    return (<div className="view-db">
+    } 
+    return (
+      <div className="view-db">
     <div className="avatar"><img src={avatar} className="avatar-img"/></div>
     <br/>
-    <div class='add-carpet' >
+    <div className='add-carpet' >
     <AddCarpet/>
     </div>
-    <ul>
-    {data?.map(carpet => <li key={carpet.id}>
-    {carpet.model}, {carpet.size} ,{t_price}
-    </li>)}
-    </ul>
+    <div className="table">
+    <div className='item table-header'>
+    
+     <p className='cell txt-cell table-header'>موديل</p>
+     <p className='cell table-header'>مساحة</p>
+     <p className='cell table-header'>السعر</p>
+     <p className="minus-btn table-header"></p>
+    </div>
+    {data?.map(carpet => <div className='item' key={carpet.id}>
+    
+     <p className='cell txt-cell'>{carpet.model}</p>
+     <p className='cell'>{carpet.W*carpet.L*0.0001}</p>
+     <p className='cell'>{carpet.t_price}</p>
+     <button className='minus-btn' onClick={()=>db.carpets.delete(carpet.id)}>-</button>
+    </div>)}
+    </div>
     </div>)      
   }

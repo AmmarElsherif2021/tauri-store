@@ -1,14 +1,14 @@
 //check for: https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
 import {React, useState} from 'react';
 import './App.css';
-import Login from './Container/Login';
+//import Login from './Container/Login';
 import { BrowserRouter,Routes, Route,Link} from 'react-router-dom';
 import Dashboard from './Dashboard/Dashboard';
 
 import Hello from './Hello/Hello'
 import Bill from './Bill/Bill';
 import ViewDB from './ViewDB/ViewDB';
-import Preferences from './Preferences/Preferences';
+//import Preferences from './Preferences/Preferences';
 import Hero from './Hello/Hero/Hero';
 
 //import useToken from './useToken';
@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
 
         
-          <Link to="/Hello" > <button>Home</button> </Link>
+          <Link to="/Hello" > <button className='home-btn'>Home</button> </Link>
        
 
         <Routes>

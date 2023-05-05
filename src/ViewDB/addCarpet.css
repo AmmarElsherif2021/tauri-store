@@ -18,6 +18,7 @@ p{
 }
 input{
     max-width: 110px;
+    margin:3px;
 }
 .num{
     width:50px;

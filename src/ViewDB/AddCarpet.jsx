@@ -25,8 +25,8 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     }else if(name=='price_m'){
       setprice_m(Number(value))
     }
-    setsize((prevS)=>prevS=W*L*0.0001)
-    setT_price((prevP)=>prevP=size*price_m)
+    setsize(W*L*0.0001)
+    setT_price(size*price_m)
     
 }
  
@@ -36,7 +36,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     try {
 
       // Add the new Carpet!
-      const id = await db.carpet.add({
+      const id = await db.carpets.add({
         model,
         price_m,
         W,
@@ -54,7 +54,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       setT_price(0);
       
     } catch (error) {
-      setStatus(`Failed to add ${model}`);
+      setStatus(`Failed to add ${model} ${error}`);
     }
   }
 
@@ -67,7 +67,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
      </p>
     </div>
     <p>
-    :موديل
+    موديل
     <input
       type="text"
       value={model}
@@ -75,7 +75,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     />
     </p>
     <p>
-    :سعر المتر
+    سعر المتر
     <input
       type="number"
       value={price_m}
@@ -86,7 +86,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     </p>
     
     <p>
-    : عرض
+     عرض
     <input
       type="number"
       value={W}
@@ -97,7 +97,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     </p>
     
     <p>
-    :طول
+    طول
     <input
       type="number"
       value={L}
@@ -107,9 +107,9 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     />
     </p>
     
-      <p>{size}: مساحة</p><br/>
+      <p>{size} مساحة</p><br/>
       
-      <p>{t_price}: اجمالي السعر</p>
+      <p>{t_price} اجمالي السعر</p>
       
     
     <button onClick={addCarpet} className='btn'>
