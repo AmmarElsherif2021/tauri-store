@@ -1,70 +1,57 @@
-.bill{
-    background:rgb(123, 93, 153);
+.body{
+  background: rgb(233, 118, 118);
+  width:70%;
+  justify-content: center;
+  padding-left: 25%;
+  
+}
+.print{
+  background: gold;
+  width:420px;
+  height:595px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  
+}
+.header{
+    background: none;
+    display: flex;
+    flex-direction: row;
+    width:96%;
+    justify-content: space-between;
+   
+}
+.table-header{
+    background: none;
+    align-items: center;
+    width:170px;
+    max-height:390px;
+    font-size: 13px;
+    direction: rtl;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    margin:5px; 
+}
+.table{
+    background: rgb(255, 0, 0);
+    align-items: center;
     
+    max-height:590px;
+    font-size: 13px;
+    direction: rtl;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:5px; 
+
+}
+.avatar-bill{
+    background: none;
+    width:20%;
     justify-content: center;
-    padding-left:15%;
-    background: none;
-    height:50%;
-    width:740px;
-}
-
-.header {
-        display: flex;
-        flex-direction: row;
-
-        width:700px
-    }
-       
-     .store_info{
-        background-color: none; 
-        flex:0.75;
-        
-     }
-     .client_info {
-     
-        background-color: none; 
-        flex:0.75;
-        
-     }
-     .hero {
-     
-        background-color: none; 
-        flex:1.5;
-        
-     }
-    
-    .bill_body{
-      background: none;
-
-      height:auto;
-      margin-top:3px;
-      width:700px;
-    }
-     .note_list{
-    border: 2px  solid none;
-    border-radius: 9px;
-    display:flex;
-    flex-direction:row;
-    list-style-type: none;
-    justify-content:first baseline;
-    background: none;
-    width: 700px;
-}
-li{
-    width: 120px;
-    max-width: 121px;
-    padding: 5px;
-    margin: 5px;
-
-    list-style-type: none;
-    overflow-wrap: break-word;
-}
-
-.note-root{
-border: none;
-border-radius: 9;
-margin: 2px;
-padding: 2px;
-background: none;
-width: 800px;
+    margin:2px;
 }
