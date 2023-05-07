@@ -2,6 +2,7 @@ import React from "react";
 import ReactToPrint from "react-to-print";
 import './bill.css'
 import Avatar from './bill.png'
+import Item from "./Item";
 function Header(){
   return(
     <div className='header'>
@@ -40,6 +41,7 @@ function Print(){
     
     <div className="print">
      <Header/>
+     <Item/>
      <table className="table">
         <thead>
           <th>column 1</th>
