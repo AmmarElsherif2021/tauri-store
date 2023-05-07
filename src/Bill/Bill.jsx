@@ -41,7 +41,7 @@ function Print(){
     
     <div className="print">
      <Header/>
-     <Item/>
+     
      <table className="table">
         <thead>
           <th>column 1</th>
@@ -73,6 +73,7 @@ function Print(){
 export default  function Bill(){
   return (
     <div className="body">
+    <Item/>
       <ReactToPrint
         trigger={() => <a href="#">Print this out!</a>}
         content={() => this.componentRef}

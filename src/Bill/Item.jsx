@@ -4,16 +4,15 @@ import TextField from '@mui/material/TextField';
 import './item.css'
 import React from 'react'
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from '../ViewDB/Carpets'
+import {db} from '../ViewDB/Carpets'
+import { red, yellow } from '@mui/material/colors';
 
-export default function Item(props){
-    let queryValue;
+
+
+export default function Item(){
+  const data = useLiveQuery(() => db.carpets.toArray(), []);
     //const data = useLiveQuery(() => db.carpets.toArray(), []);
-    const data = (async () => {
    
-      return await db.carpets
-        .toArray();
-    });
     /*data?.map(x =>dataList.push(
       {
         'key':x.id,
@@ -36,15 +35,17 @@ export default function Item(props){
            <Autocomplete
             disablePortal
             id="dataList"
-            options={dataList}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="موديل" />}
+            options={data}
+            getOptionLabel={(option) => `  ${option.W} X ${option.L} , ${option.t_prics} , ${option.model}`}
+            sx={{ width: 400 , background:yellow }}
+            renderInput={(params) => <TextField className='txt-field' {...params} label="موديل" />}
           />
            </th>
-           <th>column 2</th>
-           <th>column 3</th>
+           <th>أضف</th>
+           
          </thead>
          </table>
+         
         </div>
     )
 }

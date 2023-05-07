@@ -1,7 +1,17 @@
 .item{
-    background: rgb(18, 163, 103);
-    width:90px;
-    height:50px;
-    position: relative;
-    top:0;
+ max-width: 445px;
+ 
+ justify-content: center;
+ padding: 2px;
+ background-color: white;
+}
+.input-table{
+    background-color: white;
+}
+#dataList{
+    min-width:340px;
+    background:none;
+}
+.txt-field{
+    background-color: none;
 }
