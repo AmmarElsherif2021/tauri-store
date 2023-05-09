@@ -1,8 +1,14 @@
 import React from "react";
+import Hero from '../Hello/Hero/Hero'
+import { useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../ViewDB/Carpets";
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 import ReactToPrint from "react-to-print";
 import './bill.css'
 import Avatar from './bill.png'
-import Item from "./Item";
+//import Item from "./Item";
 function Header(){
   return(
     <div className='header'>
@@ -36,36 +42,59 @@ function Header(){
   </div>
   )
 }
+
+//--------------------------------
+const picked=null;
+
+function Item(){
+  const [Id,setId]=useState();
+  
+  const data = useLiveQuery(() => db.carpets.toArray(), []);
+  ;
+  /*function getCarpet(id){
+    db.carpets.get(id).then(function(item) {
+      return item
+    });
+    function handleChange(event, value){
+      setId(value.id)
+      
+    }
+  }*/
+    return(
+        <div className='item'>
+         
+         <table className="input-table">
+         <thead>
+           <th>
+           <Autocomplete
+            disablePortal
+            
+            id="dataList"
+            options={data}
+            getOptionLabel={(option) =>{
+              setId(option.id);
+              picked = Id;
+              return `${option.id},${option.model},${option.W},${option.L},${option.t_price}`
+            }}
+            sx={{ width: 400 }}
+            renderInput={(params) => <TextField className='txt-field' {...params} label="موديل" />}
+          />
+           </th>
+         </thead>
+         </table>
+         <button>{Id}</button>
+        </div>
+    )
+}
+//---------------------
 function Print(){
+  const [addedList,setAddedList]=useState([])
   return (
     
     <div className="print">
+    
      <Header/>
-     
-     <table className="table">
-        <thead>
-          <th>column 1</th>
-          <th>column 2</th>
-          <th>column 3</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>data 1</td>
-            <td>data 2</td>
-            <td>data 3</td>
-          </tr>
-          <tr>
-            <td>data 1</td>
-            <td>data 2</td>
-            <td>data 3</td>
-          </tr>
-          <tr>
-            <td>data 1</td>
-            <td>data 2</td>
-            <td>data 3</td>
-          </tr>
-        </tbody>
-      </table>
+     <button onClick={setAddedList([...addedList,picked])}>+</button>
     </div>
   );
 }
@@ -73,7 +102,8 @@ function Print(){
 export default  function Bill(){
   return (
     <div className="body">
-    <Item/>
+      <Item/>
+      
       <ReactToPrint
         trigger={() => <a href="#">Print this out!</a>}
         content={() => this.componentRef}
