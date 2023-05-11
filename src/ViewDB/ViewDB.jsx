@@ -32,6 +32,7 @@ export default function ViewDB() {
      <p className='cell txt-cell table-header'>موديل</p>
      <p className='cell table-header'>مساحة</p>
      <p className='cell table-header'>السعر</p>
+     <p className='cell table-header'>الكمية</p>
      <p className="minus-btn table-header"></p>
     </div>
     {data?.map(carpet => <div className='item' key={carpet.id}>
@@ -39,6 +40,7 @@ export default function ViewDB() {
      <p className='cell txt-cell'>{carpet.model}</p>
      <p className='cell'>{carpet.W*carpet.L*0.0001}</p>
      <p className='cell'>{carpet.t_price}</p>
+     <p className='cell'>{carpet.qty}</p>
      <button className='minus-btn' onClick={()=>db.carpets.delete(carpet.id)}>-</button>
     </div>)}
     </div>

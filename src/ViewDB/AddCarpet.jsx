@@ -12,6 +12,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
   const [L, setL] = useState(0);
   const [size, setsize] = useState(0);
   const [t_price, setT_price] = useState(0);
+  const [qty, setQty] = useState(1);
   const [status, setStatus] = useState("");
   //-changing function-------------------
    
@@ -25,8 +26,11 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
     }else if(name=='price_m'){
       setprice_m(Number(value))
     }
-    setsize(W*L*0.0001)
-    setT_price(size*price_m)
+    else if(name=='qty'){
+      setQty(Number(value))
+    }
+    setsize((W*L*0.0001).toFixed(2))
+    setT_price((size*price_m).toFixed(0))
     
 }
  
@@ -52,6 +56,7 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       setL(0.0);
       setsize(0.0);
       setT_price(0);
+      setQty(1)
       
     } catch (error) {
       setStatus(`Failed to add ${model} ${error}`);
@@ -102,6 +107,17 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
       type="number"
       value={L}
       name='L'
+      onChange={handleChange}
+      className='num'
+    />
+    </p>
+
+    <p>
+    الكمية
+    <input
+      type="number"
+      value={qty}
+      name='qty'
       onChange={handleChange}
       className='num'
     />
