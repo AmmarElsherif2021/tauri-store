@@ -43,6 +43,9 @@ export default function ViewDB() {
      <p className='cell'>{carpet.qty}</p>
      <button className='minus-btn' onClick={()=>db.carpets.delete(carpet.id)}>-</button>
     </div>)}
+    <button onClick={()=>db.delete().then(() => {
+      console.log('Database successfully deleted');
+  })}>delete db</button>
     </div>
     </div>)      
   }

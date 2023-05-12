@@ -45,7 +45,8 @@ export default function AddCarpet({defaultPrice_m} = {defaultPrice_m: 0}){
         price_m,
         W,
         L,
-        t_price
+        t_price,
+        qty
 
       });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Print.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useState } from 'react';
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -55,17 +55,19 @@ export default function Print(props){
                             </tr>
                             
                             
-                            {()=>props.carpets.map((x)=>{
+                            {/*addedCarpets.map()*/
+                            props.standby.map((x)=>{
                                 return(
                                 <tr className="content">
-                                <td>{x['model']}</td>
+                                <td>{x.model}</td>
                                 <td>#</td>
-                                <td>{x['W']}</td>
-                                <td>{x['L']}</td>
-                                <td>{x['t_price']}</td>
+                                <td>{x.W}</td>
+                                <td>{x.L}</td>
+                                <td>{x.t_price}</td>
                                 </tr>
                                 )
-                            })}
+                            })
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -90,11 +92,11 @@ export default function Print(props){
                 <div className="address p-2">
                     <table className="table table-borderless">
                         <tbody>
-                            <tr className="add">
+                            <tr className="added">
                                 <td>بيانات الفاتورة</td>
                             </tr>
                             <tr className="content">
-                                <td>{props.agent}:اسم العميل <br />{props.phone}:تليفون<br /> اسم البائع: xxxx <br /></td>
+                                <td>{props.agent}:اسم العميل <br />{props.phone}:تليفون<br /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -106,6 +108,4 @@ export default function Print(props){
         
         
       </div>
-   )
-}
-
+   )}
