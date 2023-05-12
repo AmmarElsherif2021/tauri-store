@@ -10,10 +10,7 @@ import Avatar from './bill.png'
 import Print from './Print';
 //import Item from "./Item";
 
-import jsPDF from 'jspdf';
-import pdfMake from 'pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import htmlToPdfmake from 'html-to-pdfmake';
+
 
 
 
@@ -31,19 +28,30 @@ export default function Bill(){
     const [addedList,setAddedList]=useState([])
     const [addedCarpets,setAddedCarpets]=useState([])
     const [sum,setSum]=useState(0);
-    const [status,setStatus]=useState(true)
+    //const [status,setStatus]=useState(false)
+    const [qty,setQty]=useState(1)
  
 //adding carpets to bill   
      
     //handle qty:
-    function handleQty(id){
-        db.carpets.get(id).then((result) => {
-            setAddedCarpets(()=>[...addedCarpets,result])
-           })
-    }
+    // function handleQty(id){
+    //     db.carpets.get(id).then((result) => {
+            
+    //        })
+    //}
     function updateCarpets(id){
         db.carpets.get(id).then((result) => {
-           setAddedCarpets(()=>[...addedCarpets,result])
+            temp={}
+            // if (qty<=result.qty){
+            //     temp={
+            //         ...result,
+            //         qty:qty
+            //     }
+            // }else{
+            //    temp=result
+            // }
+           setAddedCarpets(()=>{return [...addedCarpets,result]})
+           
           });
           
     }
@@ -56,11 +64,12 @@ export default function Bill(){
     }
  //handle adding items
     function handleAdd(){
+        
         setAddedList(()=>{return [...addedList,picked]});
         updateCarpets(picked);
         handleSum();
         handleClear();
-        console.log(addedCarpets)
+        console.log(`-------------------->+${addedCarpets}`)
     }
 
 //clear Autocomplete after adding
@@ -97,15 +106,16 @@ export default function Bill(){
           <div className="bill-inputs">
                 
           <Autocomplete
-                disablePortal="true"
+                disablePortal={true}
                 id="dataList"
                 key={key}
                 value={value}
+                options={data}
                 onChange={(e, value) => {
                     setValue(()=>value)
-                    setPicked(()=> value.id);
+                    setPicked(()=> value.id)
                 }}
-                options={data}
+                
                 getOptionLabel={(option) =>{
                 
                     return `${option.model}--${option.W}--${option.L}--${option.t_price}`
@@ -114,21 +124,11 @@ export default function Bill(){
                 sx={{ width: 700 }}
                 renderInput={(params) => <TextField  {...params} label="موديل" className='txt-field'/>}
                 />
-                <Autocomplete
-                disablePortal="true"
-                id="qty"
-                
-                
-                options={data}
-                getOptionLabel={(option) =>{
-                
-                    return option.qty
-                }}
-                className="complete"
-                sx={{ width: 50 }}
-                renderInput={(params) => <TextField  {...params} label="كمية" className='num'/>}
-                />
-
+                <input
+                    type="number"
+                    placeholder="qty"
+                    onChange={(e)=>setQty(()=>Number(e.target.value))}
+                    />
                 <input
                     type="text"
                     placeholder="name"

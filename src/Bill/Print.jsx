@@ -60,7 +60,7 @@ export default function Print(props){
                                 return(
                                 <tr className="content">
                                 <td>{x.model}</td>
-                                <td>#</td>
+                                <td>{x.qty}</td>
                                 <td>{x.W}</td>
                                 <td>{x.L}</td>
                                 <td>{x.t_price}</td>
