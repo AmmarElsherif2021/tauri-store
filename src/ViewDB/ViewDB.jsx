@@ -30,6 +30,7 @@ export default function ViewDB() {
     <div className='item table-header'>
     
      <p className='cell txt-cell table-header'>موديل</p>
+     <p className='cell txt-cell table-header'>النوع</p>
      <p className='cell table-header'>مساحة</p>
      <p className='cell table-header'>السعر</p>
      <p className='cell table-header'>الكمية</p>
@@ -38,6 +39,7 @@ export default function ViewDB() {
     {data?.map(carpet => <div className='item' key={carpet.id}>
     
      <p className='cell txt-cell'>{carpet.model}</p>
+     <p className='cell'>{carpet.type}</p>
      <p className='cell'>{carpet.W*carpet.L*0.0001}</p>
      <p className='cell'>{carpet.t_price}</p>
      <p className='cell'>{carpet.qty}</p>

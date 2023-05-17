@@ -8,7 +8,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import htmlToPdfmake from 'html-to-pdfmake';
 //https://www.makeuseof.com/how-to-use-props-in-reactjs/
 export default function Print(props){
-
+    
     function printDocument(){
           const doc = new jsPDF();
          
@@ -47,7 +47,8 @@ export default function Print(props){
                         <tbody>
                             <tr className="add">
                                 <td>Model</td>
-                                <td>num</td>
+                                <td>qty</td>
+                               
                                 <td>W</td>
                                 <td>L</td>
                                 <td>Price</td>
@@ -55,18 +56,14 @@ export default function Print(props){
                             </tr>
                             
                             
-                            {/*addedCarpets.map()*/
-                            props.standby.map((x)=>{
-                                return(
-                                <tr className="content">
-                                <td>{x.model}</td>
-                                <td>{x.qty}</td>
-                                <td>{x.W}</td>
-                                <td>{x.L}</td>
-                                <td>{x.t_price}</td>
-                                </tr>
-                                )
+                            {/*addedCarpets.map()
+                             
+                            */
+                            
+                            props.carpetsQ.map((x)=>{
+                                return x
                             })
+                            
                             }
                         </tbody>
                     </table>
