@@ -5,7 +5,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 import { db } from "./Carpets";
 import AddCarpet from "./AddCarpet";
-import minus from './minus.png'
+//import minus from './minus.png'
 import avatar from './column.png'
 export default function ViewDB() {
     const data = useLiveQuery(() => db.carpets.toArray(), []);

@@ -33,7 +33,7 @@ export default function Hello(){
     {
         id: 3,
         title: "Get history",
-        path: '/',
+        path: '/Archive',
         coverImg: history,
         
     }
@@ -60,25 +60,6 @@ export default function Hello(){
       {cards}
     </div>
 
-    <p>.......</p>
-
-    <div className="row">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-    </div>
-
-    <p>{greetMsg}</p>
     </div>
   );
 }

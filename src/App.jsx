@@ -8,6 +8,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Hello from './Hello/Hello'
 import Bill from './Bill/Bill';
 import ViewDB from './ViewDB/ViewDB';
+import Archive from './Archive/Archive';
 //import Preferences from './Preferences/Preferences';
 import Hero from './Hello/Hero/Hero';
 
@@ -36,6 +37,7 @@ function App() {
           <Route  path="Hello"  element={<Hello/>}/>
           <Route path="Bill" element={<Bill/>}/>
           <Route path="ViewDB" element={<ViewDB/>}/>
+          <Route path="Archive" element={<Archive/>}/>
         </Routes>
       </BrowserRouter>
     </div>

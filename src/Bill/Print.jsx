@@ -2,28 +2,42 @@ import React from 'react';
 import './Print.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+//import { writeFile } from '@tauri-apps/api/fs';
+//import pdfMake from 'pdfmake/build/pdfmake';
+//import pdfFonts from 'pdfmake/build/vfs_fonts';
+//import htmlToPdfmake from 'html-to-pdfmake';
+
 import jsPDF from 'jspdf';
-import pdfMake from 'pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import htmlToPdfmake from 'html-to-pdfmake';
+import html2canvas from 'html2canvas';
+
+import arabicFont from './NotoSansArabic-Thin.ttf'
 //https://www.makeuseof.com/how-to-use-props-in-reactjs/
+
 export default function Print(props){
     
-    function printDocument(){
-          const doc = new jsPDF();
-         
-          //get html
-          const pdfTable = document.getElementById('divToPrint');
-          //html to pdf format
-          var html = htmlToPdfmake(pdfTable.innerHTML);
-        
-          const documentDefinition = { content: html };
-          pdfMake.vfs = pdfFonts.pdfMake.vfs;
-          pdfMake.createPdf(documentDefinition).open();
-        
-    }
-    
-    
+
+//   function printDocument() {
+//     const tableHtml = document.getElementById('divToPrint');
+//     const tableContent = htmlToPdfmake(tableHtml);
+//     const docDefinition = {
+//       content: [tableContent],
+//       defaultStyle: {
+//         font: 'myArabicFont',
+//       },
+//     };
+//     pdfMake.createPdf(docDefinition).open();
+//   }
+function printDocument(){
+     const input = document.getElementById('divToPrint');
+     html2canvas(input)
+     .then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'JPEG', 0, 0);
+      pdf.output('dataurlnewwindow');
+    });
+  
+}
     return (
       <div className="bill-container mt-5">
        <button className="btn btn-primary" onClick={printDocument}>Export To PDF</button>
