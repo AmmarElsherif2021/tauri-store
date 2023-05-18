@@ -1,1 +1,33 @@
+.p-2{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+hr {
+    color: #0000004f;
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+.print-container{
+    background: rgb(250, 212, 0);
+    min-width:740px;
+    height:100%;
+    overflow: auto;
+    
+    position: absolute;
+    top:250px;
+    left:200px;
 
+}
+#divToPrint{
+    
+    background: white;
+    border:3px solid black;
+    min-width:700px;
+    
+    position: absolute;
+    top:0px;
+    left:0px;  
+
+   
+}

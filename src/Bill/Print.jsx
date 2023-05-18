@@ -1,7 +1,7 @@
 import React from 'react';
 import './Print.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 //import { writeFile } from '@tauri-apps/api/fs';
 //import pdfMake from 'pdfmake/build/pdfmake';
 //import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -36,10 +36,22 @@ function printDocument(){
       pdf.addImage(imgData, 'JPEG', 0, 0);
       pdf.output('dataurlnewwindow');
     });
-  
-}
+        
+    }
+    //time and date
+    const [time, setTime] = useState(new Date());
+    const [date, setDate] = useState(new Date());    
+    useEffect(() => {
+      const timerID = setInterval(() => setTime(new Date()), 1000);
+      return () => clearInterval(timerID);
+    }, []);
+    useEffect(() => {
+        const timerID = setInterval(() => setDate(new Date()), 1000);
+        return () => clearInterval(timerID);
+      }, []);
+
     return (
-      <div className="bill-container mt-5">
+      <div className="print-container mt-5">
        <button className="btn btn-primary" onClick={printDocument}>Export To PDF</button>
       <div id="divToPrint" className="m-3">
       <div >
@@ -50,6 +62,9 @@ function printDocument(){
                     <div className="d-flex flex-column"> <span className="font-weight-bold">فاتورة</span> <small>ID: XXXX</small> </div>
                     <div><span>الذوق الرفيع للسجاد</span></div>
                     <div><span>phone: 01XXXXXXXXX</span> </div>
+                    <div><small>{time.toLocaleTimeString()}</small></div>
+                    <div><small>{date.toLocaleDateString()}</small></div>
+                    
                 </div>
                 
                 <hr />

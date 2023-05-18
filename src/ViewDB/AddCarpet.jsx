@@ -5,7 +5,7 @@ import { useState,useEffect } from 'react';
 import {db} from './Carpets';
 //import ViewDB from './ViewDB'
 export default function AddCarpet(){
-  const [added,setAdded]=useState(null)
+  
 
   //===============================================================================
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

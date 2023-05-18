@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+.bill-container{
+    width:100%;
+    background: red;
+    height:auto;
+    min-height:100%;
+    padding:8px;
+}
 .txt-field{
    min-width:500px;
 }
@@ -12,37 +19,34 @@
 .bill-inputs{
     position: absolute;
     top:100px;
+    height:150px;
+    min-width:740px;
     left:200px;
+    display:flex;
+    flex-direction: column;
+    background: brown;
 }
-
+.input-row{
+    display:flex;
+    flex-direction:row;
+    margin:5px;
+    justify-content: space-around;
+}
+.print-area{
+    background: red;
+    
+}
 /*print---------------------------------------*/
 
 
 
-.bill-container{
-    background: rgb(250, 212, 0);
-    margin-top:25px;
-    position: absolute;
-    top:140px;
 
-    
-}
 .btn-primary{
     position: fixed;
     top:70px;
+    left:20px;
 }
-#divToPrint{
-    
-    background: white;
-    border:3px solid black;
-    width:700px;
-    
-    position: absolute;
-    top:60px;
-    left:170px;  
 
-   
-}
 
 .add-btn{
  position: absolute;
@@ -50,13 +54,3 @@
  top: 65px;    
 }
 
-.p-2{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-hr {
-    color: #0000004f;
-    margin-top: 5px;
-    margin-bottom: 5px
-}
