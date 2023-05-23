@@ -50,6 +50,9 @@ export default function AddCarpet(){
     setsize((W*L*0.0001).toFixed(2))
     setT_price(()=>(size*price_m).toFixed(0))
   },[W]);
+  useEffect(()=>{
+    setT_price(()=>(size*price_m).toFixed(0))
+  },[size]);
   
 // hANDLE TYPE OF CARPET
 function handleType(e){

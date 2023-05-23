@@ -15,7 +15,7 @@ export default function Archive(){
         <h1>Archive !</h1>
         <table className='archive-table'>
          <tbody>
-         {data?.map(bill => <tr className='item' key={bill.id}>
+         {data?.map(bill =>( <tr className='item' key={bill.id}>
     
             <td className='cell txt-cell'>{bill.id}</td>
             <td className='cell'>{bill.name}</td>
@@ -23,8 +23,8 @@ export default function Archive(){
             <td className='cell'>{bill.history}</td>
             <td className='cell'>{bill.total}</td>
             <td className='cell'>{bill.carpets}</td>
-            <td><button className='edit-btn'>edit</button></td>
-         </tr>)}
+            <button className='edit-btn'>edit</button>
+         </tr>))}
          </tbody>
         </table>
         </div>

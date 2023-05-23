@@ -28,6 +28,7 @@
     "react-tabs": "^6.0.1",
     "realm-web": "^2.0.0",
     "sort-by": "^1.2.0",
+    "uuid": "^9.0.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {

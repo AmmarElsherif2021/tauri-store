@@ -5,6 +5,6 @@ import Dexie from 'dexie';
 
 
 export const archiveDB = new Dexie('myDatabase');
-archiveDB.version(8).stores({
+archiveDB.version(11).stores({
   bills: '++id,name,phone,history,total,carpets' // Primary key and indexed props
 });

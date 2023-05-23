@@ -1,21 +1,55 @@
 import React from 'react';
 import './Print.css'
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import arabicFont from './NotoSansArabic-Thin.ttf'
 import { useState , useEffect } from 'react';
 //import { writeFile } from '@tauri-apps/api/fs';
 //import pdfMake from 'pdfmake/build/pdfmake';
 //import pdfFonts from 'pdfmake/build/vfs_fonts';
 //import htmlToPdfmake from 'html-to-pdfmake';
-
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-
-import arabicFont from './NotoSansArabic-Thin.ttf'
 //https://www.makeuseof.com/how-to-use-props-in-reactjs/
+
+
 
 export default function Print(props){
     
-
+    function printDocument(){
+        let component = document.getElementById('divToPrint');
+                    // Create a new jsPDF document with page size set to A5
+                    let doc = new jsPDF('p', 'mm', 'a5');
+      
+                // Set the maximum height of each page
+                let pageHeight = doc.internal.pageSize.height - 20;
+      
+                // Use html2canvas to capture the content of the component as an image
+                html2canvas(component).then(canvas => {
+                // Get the image data
+                let imgData = canvas.toDataURL('image/png');
+      
+                // Calculate the height of the image in millimeters
+                let imgHeight = canvas.height * 150 / canvas.width;
+      
+                // Keep track of the current height position on the page
+                let heightLeft = imgHeight;
+                let position = 9;
+      
+                // Add the image to the first page of the jsPDF document
+                doc.addImage(imgData, 'PNG', 9, position, 128, imgHeight);
+                heightLeft -= pageHeight;
+      
+                // Add additional pages if needed
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', 9, position, 128, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                // Save the jsPDF document
+                doc.output('dataurlnewwindow');
+                });
+        }
 //   function printDocument() {
 //     const tableHtml = document.getElementById('divToPrint');
 //     const tableContent = htmlToPdfmake(tableHtml);
@@ -27,17 +61,7 @@ export default function Print(props){
 //     };
 //     pdfMake.createPdf(docDefinition).open();
 //   }
-function printDocument(){
-     const input = document.getElementById('divToPrint');
-     html2canvas(input)
-     .then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, 'JPEG', 0, 0);
-      pdf.output('dataurlnewwindow');
-    });
-        
-    }
+
     //time and date
     const [time, setTime] = useState(new Date());
     const [date, setDate] = useState(new Date());    
@@ -52,19 +76,22 @@ function printDocument(){
 
     return (
       <div className="print-container mt-5">
-       <button className="btn btn-primary" onClick={printDocument}>Export To PDF</button>
-      <div id="divToPrint" className="m-3">
-      <div >
+      
+      <div  className="m-3" id="divToPrint" style={{width: '128mm'}}>
+      <div  className='scanned'>
       
         <div >
             <div className="bill-card">
-                <div className="p-2">
-                    <div className="d-flex flex-column"> <span className="font-weight-bold">فاتورة</span> <small>ID: XXXX</small> </div>
-                    <div><span>الذوق الرفيع للسجاد</span></div>
-                    <div><span>phone: 01XXXXXXXXX</span> </div>
-                    <div><small>{time.toLocaleTimeString()}</small></div>
-                    <div><small>{date.toLocaleDateString()}</small></div>
+                <div className="header-row">
+                    <div className="header-col"> 
+                    <small>{props.agent}:اسم العميل </small>
+                    <small>{props.phone}:تليفون</small>
                     
+                    
+                     </div>
+                     
+                    <div className="header-col print-title"><span> </span></div>
+                    <div className="header-col"><small>الذوق الرفيع</small><small>{time.toLocaleTimeString()}</small><small>{date.toLocaleDateString()}</small></div>
                 </div>
                 
                 <hr />
@@ -75,12 +102,12 @@ function printDocument(){
                     <table className="table table-borderless">
                         <tbody>
                             <tr className="add">
-                                <td>Model</td>
-                                <td>qty</td>
+                                <td>موديل</td>
+                                <td>عدد</td>
                                
-                                <td>W</td>
-                                <td>L</td>
-                                <td>Price</td>
+                                <td>عرض</td>
+                                <td>طول</td>
+                                <td>سعر</td>
                                 
                             </tr>
                             
@@ -103,12 +130,12 @@ function printDocument(){
                         <tbody>
                             <tr className="add">
                                 
-                                <td>خصم</td>
+                                
                                 <td className="text-center">اجمالي</td>
                             </tr>
                             <tr className="content">
                                 
-                                <td>{props.discount}</td>
+                                
                                 <td className="text-center">{props.total}</td>
                             </tr>
                         </tbody>
@@ -118,15 +145,14 @@ function printDocument(){
                 <div className="address p-2">
                     <table className="table table-borderless">
                         <tbody>
-                            <tr className="added">
-                                <td>بيانات الفاتورة</td>
-                            </tr>
+                            
                             <tr className="content">
-                                <td>{props.agent}:اسم العميل <br />{props.phone}:تليفون<br /></td>
+                                <td><small>مستناد طريق شبراخيت - فرنوى , 01006658433</small> </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <button className="btn btn-primary" onClick={printDocument}>Export To PDF</button>
             </div>
         </div>
     </div>

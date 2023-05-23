@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './hello.css'
 import Card from "../layouts/Card";
 //import avatar from '../assets/avatar.png'
 import addBill from '../assets/add-bill.png'
@@ -21,6 +22,7 @@ export default function Hello(){
         title: "New bill",
         path:'/Bill',
         coverImg: addBill,
+        sub:'فاتورة جديدة'
         
     },
     {
@@ -28,6 +30,7 @@ export default function Hello(){
         title: "Add new carpet",
         path:'/ViewDB',
         coverImg: addDatabase,
+        sub:'صنف جديد'
         
     },
     {
@@ -35,28 +38,27 @@ export default function Hello(){
         title: "Get history",
         path: '/Archive',
         coverImg: history,
+        sub:'فواتير سابقة '
         
     }
   ]
   const cards=data.map((x)=>{
     return(
-       <Link className="card-item" to={x.path}>
-       <Card urlPath={x.path} imgPath={x.coverImg} />
+       <Link to={x.path}>
+       <div className='card-item'>
+       <Card urlPath={x.path} imgPath={x.coverImg}  />
+       <h3>{x.sub}</h3>
+       </div>
        </Link>
         
         )
 })
 
- 
-
-
   return (
     
-    <div className="container">
-    
-    <Hero/>
-
-    <div className="row">
+    <div className="hello-container">
+    <div className="hello-row hero-row"> <Hero/></div>
+    <div className="hello-row">
       {cards}
     </div>
 

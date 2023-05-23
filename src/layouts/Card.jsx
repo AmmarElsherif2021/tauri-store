@@ -15,7 +15,7 @@ export default function  Card(props){
         <div className="card" onClick={handleClick
         }>
         <a href={props.urlPath} target="_blank">
-           <img src={props.imgPath} className="logo vite" alt="Vite logo" />
+           <img src={props.imgPath} className="card-img" alt="Vite logo" />
         </a>
         </div>
     )

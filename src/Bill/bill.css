@@ -1,56 +1,102 @@
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 .bill-container{
     width:100%;
-    background: red;
+    text-orientation: rtl;
     height:auto;
     min-height:100%;
     padding:8px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.container-row{
+    background:none;
+     
+    
+}
+.bill-title{
+    justify-content: center;
+    width:500px;
+    position:absolute;
+    left:25%;
 }
 .txt-field{
    min-width:500px;
 }
+.error{
+    color:rgb(255, 255, 255);
+    background-color: rgb(233, 33, 33);
+    margin:3px;
+}
 .auto-complete{
     min-width: 700px;
+    padding:8px;
     background-color:none;
-    
-    
     border:2px solid black;
 }
+.add-btn{
+    margin:10px;  
+    width:100px;
+    height:60px; 
+   }
 .bill-inputs{
     position: absolute;
     top:100px;
-    height:150px;
-    min-width:740px;
     left:200px;
+    min-height:150px;
+    min-width:810px;
+   
     display:flex;
     flex-direction: column;
-    background: brown;
+    background:none;
+    justify-content: center;
+    align-items: center;
 }
 .input-row{
     display:flex;
     flex-direction:row;
     margin:5px;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .print-area{
-    background: red;
+    background:none;
+    margin: 7px;
     
 }
 /*print---------------------------------------*/
 
 
-
+.save-btn{
+    position: absolute;
+    top:10%;
+    left:0;
+    border-radius: 20px;
+    background-color: none;
+}
 
 .btn-primary{
     position: fixed;
     top:70px;
     left:20px;
 }
-
-
-.add-btn{
- position: absolute;
- left:910px;
- top: 65px;    
+.added{
+    border:2px solid black;
+    background: none;
+    height:7mm;
+    overflow: hidden;
+    margin:0;
+    align-items:baseline;
 }
-
+.del-btn{
+    background: white;
+    width:3mm;
+    height:5mm;
+    border:1px solid black ;
+    text-align: center;
+    font-weight: 100;
+    font-size: 12px;
+    overflow: hidden;
+    margin:0;
+    
+}
