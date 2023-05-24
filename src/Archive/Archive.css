@@ -1,3 +1,18 @@
 .archive{
-    margin:2%;
+    margin:5%;
+    background:yellow;
+    text-orientation: rtl;
+}
+.archive-table{
+    width:100%;
+    background: aqua;
+    padding:2%;
+}
+.archive-item{
+    width:100%;
+}
+.archive-cell{
+    background-color: rgb(212, 130, 130);
+    min-width:50px;
+    width:5%;
 }
