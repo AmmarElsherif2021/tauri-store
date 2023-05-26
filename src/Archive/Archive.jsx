@@ -8,17 +8,17 @@ import Bill from '../Bill/Bill';
 
 
 export default function Archive(){
-    
+  const navigate = useNavigate();
     //bill[0].carpets.map((x)=>console.log(x))
     async function handleClick(bill) {
         console.log('try')
-        const navigate = useNavigate();
+        
         try {
           
           const data2 = await archiveDB.bills.get(bill.id);
           navigate("/Bill", { state: { data2 } });
           console.log(`ffffffffffffffffffffffffffffff ${data2}`)
-          console.log(`bill--------->${bill.hasOwnProperty('carpets')}`)
+          console.log(`bill check --------------------------------------------------->${bill.carpets.map((x)=>x.model)}`)
           
         } catch (error) {
           console.log(error);
@@ -26,7 +26,11 @@ export default function Archive(){
       }
       
     const data = useLiveQuery(() => archiveDB.bills.toArray(), []);
-
+    // function returnBack(bid){
+    //   setItems((prevItems)=>prevItems.filter(item => item.id !== bid)) 
+    //   setCarpetsjsx((prevItems)=>prevItems.filter(item => item.props.val.id !== bid))
+    //   handleClear() 
+    // }
     return(
         <div className='archive'>
         <h1>فواتير سابقة</h1>
@@ -52,8 +56,8 @@ export default function Archive(){
             <td className='archive-cell'>{bill.phone}</td>
             <td className='archive-cell'>{bill.history}</td>
             <td className='archive-cell'>{bill.total}</td>
-            <td className='archive-cell'>{bill.carpets && bill.carpets.map((x)=>`${x.model}-${x.reqQty}`)}</td>
-            <td className='archive-cell'><button className='edit-btn' onClick={()=>handleClick(bill)}>edit</button></td>
+            <td className='archive-cell archive-items-cell'>{bill.carpets && bill.carpets.map((x)=>`${x.model}-${x.reqQty}`)}</td>
+            <td className='archive-cell'><button onClick={()=>archiveDB.bills.delete(bill.id)}>-</button><button className='edit-btn' onClick={()=>handleClick(bill)}>edit</button></td>
          </tr>))}
          </tbody>
         </table>

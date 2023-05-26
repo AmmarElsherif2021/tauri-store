@@ -9,6 +9,7 @@ import Hello from './Hello/Hello'
 import Bill from './Bill/Bill';
 import ViewDB from './ViewDB/ViewDB';
 import Archive from './Archive/Archive';
+import Return from './Return/Return';
 //import Preferences from './Preferences/Preferences';
 import Hero from './Hello/Hero/Hero';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="Bill" element={<Bill/>}/>
           <Route path="ViewDB" element={<ViewDB/>}/>
           <Route path="Archive" element={<Archive/>}/>
+          <Route path="Return" element={<Return/>}/>
         </Routes>
       </BrowserRouter>
     </div>

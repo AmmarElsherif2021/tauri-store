@@ -30,23 +30,108 @@ export default function Bill(){
 const [name,setName]=useState('');
 const [phone,setPhone]=useState('');
 const [history,setHistory]=useState('');
-
+const [items,setItems]=useState([])
+    const [carpetsjsx,setCarpetsjsx]=useState([])
 const [carpets,setCarpets]=useState([]);
+const [discount,setDiscount]=useState(0);
+const [addition,setAddition]=useState(0)
+const location = useLocation();
+
 //items 
 
-//re-open a bill .......................................................
-          //........................................................................
-          //........................................................................
-          const location = useLocation();
-          const [billModified,setBillModified] =useState(location.state?.bill);
-          useEffect(()=>console.log('modified bill !'),[billModified])
-          if(billModified){
-            setItems(()=>billModified.carpets)
-            console.log(`billmodified ${billModified}`)
-          }
-async function addBill(){
+//re-open a bill .................iiiiii..ii..ii..iiiii......iiiii..ii..ii..iiiii..................
+          //........................ii....iiiiii..iiiii......iiiii..iiiiii..ii..ii....................
+          //........................ii....ii..ii..iiiii......iiiii..ii..ii..iiiii.......................
+          
+          const [billModified, setBillModified] = useState({});
+        
+         
+          useEffect(() => {
+            console.log('location.state?.bill:', location.state?.data2);
+            setBillModified(location.state?.data2);
+          }, [location.state?.data2]);
+        
+          useEffect(() => {
+            console.log('billModified:', billModified);
+            if (billModified && billModified.hasOwnProperty('id')) {
+              archiveDB.bills.delete(billModified.id)
+              setCarpets(()=>[...billModified.carpets]);
+              setItems(()=>[...billModified.carpets]);
+              setName(()=>billModified.name)
+              setPhone(()=>billModified.phone)
+              setTotal(()=>billModified.carpets.reduce((acc, item) => acc + Number(item.t_price), 0))
+              //setHistory()
+              
+              setCarpetsjsx(()=>billModified.carpets.map((x)=><Carpet key={x.id} val={x}/>))
+              billModified.carpets.map((x)=>{
+                setError(' تم ارجاع سجاد الفاتورة الى قاعدة البيانات! تأكد من ضغط حفظ بعد التعديل')
+               let returned=db.carpets.get(x.id)
+                if(returned && returned.type!='r'){
+                  db.carpets.update(x.id,{qty:Number(x.qty)+Number(x.reqQty)})
+                }else if(returned && returned.type=='r'){
+                  db.carpets.update(x.id,{qty:Number(x.L)+Number(x.reqLen)})
+                }
+              })
+              console.log(`BILL ZOMBIE ${Object.keys(billModified)}`);
+              setBillModified({});
+            }
+          }, [billModified]);
+          useEffect(()=>{
+            if(items){
+              console.log('render <CARPETS/>')
+              items.map((x)=>console.log(x.model))
+              
+              //setCarpetsjsx(()=>items.carpets.map((x)=><Carpet key={x.id} val={x}/>))
+            }
+          },[items])
+//UPDATE YOUR DB.....................................
+async function deleteRecord(id) {
   try {
-   
+    await db.carpets.delete(id);
+    console.log(`Record with id ${id} was deleted from the carpets table`);
+  } catch (err) {
+    console.error(`An error occurred while deleting record with id ${id} from the carpets table: ${err}`);
+  }
+}
+//useEffect(()=>deleteRecord(1),[])
+
+async function handleUpdate(id) {
+  try {
+    await db.carpets
+      .where("id")
+      .equals(id)
+      .modify(async (carpet) => {
+        const added = carpets.find((item )=> item.id === carpet.id);
+        console.log(`handleUpdate called ${carpet.model}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`)
+        if (carpet.type != "r") {
+          console.log(`req qty: ${added.reqQty}`)
+          if (carpet.qty >= added.reqQty) {
+            carpet.qty -= added.reqQty;
+            console.log(`Carpet qty updated: ${carpet.qty}`);
+          } else{
+            console.log(`carpet.qty >${carpet.qty} added.reqQty> ${carpet.qty}id${id}`)
+            await db.carpets.delete(carpet.id).catch((err) => console.error(`An error occurred while deleting carpet with id ${id}: ${err}`));
+            console.log(`Carpet with id ${id} was deleted`);
+          }
+        } else {
+          if (carpet.L >= added.reqLen) {
+            carpet.L -= added.reqLen;
+            console.log(`Carpet with id ${id} was trimmed`);
+          } else {
+            
+            await db.carpets.delete(carpet.id).catch((err) => console.error(`An error occurred while deleting carpet with id ${id}: ${err}`));
+            console.log(`Carpet with id ${id} was deleted`);
+          }
+        }
+      });
+    //console.log(`Carpet with id ${id} had their qty/len decremented`);
+  } catch (err) {
+    console.error(`An error occurred while updating carpet with id ${id}: ${err}`);
+  }
+}
+
+async function addBill() {
+  try {
     // Add the new Bill!
     const id = await archiveDB.bills.add({
       name,
@@ -55,22 +140,40 @@ async function addBill(){
       total,
       carpets,
     });
-    console.log(`++++++++++++++++++ ${name} ${phone} ${history} ${total} Items ....................... ${carpets.map((x)=>Object.keys(x))}`)
-    setError(()=>`bill name: ${name},total: ${total} carpets ${carpets} successfully added. Got id ${id}`)
-    setName('');
-    setPhone('');
-    setHistory('');
+    console.log(
+      `Bill added: ${carpets.length}`
+    );
+    setError(
+      () =>
+        `Bill name: ${name}, total: ${total}, carpets: ${carpets} successfully added. Got id: ${id}`
+    );
+    console.log(`carpets to update in DB:${carpets.length}`)
+    carpets.map((x) => console.log(x.model))
+    await Promise.all(carpets.map((x) =>{ 
+     
+      handleUpdate(x.id)
+      let added=carpets.find((item )=> item.id === x.id)
+      if(added.qty==0){
+        db.carpets.delete(x.id)
+      }
+    }));
+      
+    
+    setName("");
+    setPhone("");
+    setHistory("");
     setTotal(0);
     setCarpets([]);
-    setCarpetsjsx([])
-    setItems([])
-    handleClear()
-    
+    setCarpetsjsx([]);
+    setItems([]);
+    handleClear();
   } catch (error) {
-    setError(`Failed to add// ${name}  ${phone} ${history} ${total} ${carpets} //bill, ${error}`);
-    //console.log('FAILED..........'+error)
+    setError(
+      `Failed to add bill: ${name} ${phone} ${history} ${total} ${carpets}, error: ${error}`
+    );
   }
-}  
+}
+
 
           
           
@@ -80,8 +183,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
    
 //States needed in your bill:
     //carpets
-    const [items,setItems]=useState([])
-    const [carpetsjsx,setCarpetsjsx]=useState([])
+    
     function returnBack(bid){
       setItems((prevItems)=>prevItems.filter(item => item.id !== bid)) 
       setCarpetsjsx((prevItems)=>prevItems.filter(item => item.props.val.id !== bid))
@@ -133,40 +235,10 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
             // Adding to bill
             function prepareForDB(){
                   setCarpets(()=>items)
-                  // if(value.type!='r'){
-                  //   setCarpets(()=>{
-                  //     items.map((item)=>{
-                  //       return {
-                  //         'id':item.id,
-                  //         'W':item.W,
-                  //         'L':item.L,
-                  //         'model':item.model,
-                  //         'price_m':item.price_m,
-                  //         'reqQty':item.reqQty,
-                  //         'reqLen':item.L,
-                  //         't_price':item.t_price,
-                  //         'type':item.type}
-                  //       }) })
-                    
-                  // }else{
-                  //   setCarpets(()=>{
-                  //     items.map((item)=>{
-                  //       return {
-                  //         'id':item.id,
-                  //           'W':item.W,
-                  //           'L':item.L,
-                  //           'model':item.model,
-                  //           'price_m':item.price_m,
-                  //           'reqQty':item.reqQty,
-                  //           'reqLen':item.reqLen,
-                  //           't_price':item.t_price,
-                  //           'type':item.type
-                  //       }
-                  //       }) })
-                  //  }
-             
+                  
             }
             useEffect(()=>console.log(`added carpet len ${carpets.length}`),[carpets])
+            //Handle add one carpet
             function handleAdd(){
               
                 if(value &&value.type !='r' && value.reqQty<=value.qty){
@@ -186,7 +258,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   
                   setItems((prevItems)=>[...prevItems,value])
                   //console.log(`items ======================================= ${items.length}`)
-                  prepareForDB()
+                  setCarpets(()=>items)
                   //console.log(`carpets len ${carpets.length}`)
                   handleClear()
                   
@@ -207,17 +279,23 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   
                   setItems((prevItems)=>[...prevItems,value])
                   console.log(items)
-                  prepareForDB()
+                  setCarpets(()=>items)
                   handleClear()
                 }else{
                   setError('  --تجاوزت الكمية المتاحة')
                 };
             }
+
           //Temp qty handler
           const [qtyTemp,setQtyTemp]=useState(0)
           useEffect(()=>{
             console.log('qty handled')
           },[qtyTemp])
+        
+          useEffect(()=>{
+            console.log('qty handled')
+
+          },[carpets])
           //handle Quantity
           function handleValueQty(e){
             
@@ -225,6 +303,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     if(Number(e.target.value)+qtyTemp<=Number(value.qty)){ //SOME ERROR AQUIRED ADDING ONE
 
                       setQty(()=>Number(e.target.value))
+
                       setValue((prevValue)=>({
                         ...prevValue,
                         t_price:Number(prevValue.W)*Number(prevValue.L)*0.0001*(Number(e.target.value)+qtyTemp)*Number(prevValue.price_m),
@@ -260,9 +339,10 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
           
           
           //force update
-          useEffect(()=>console.log(`items ------------${billModified}`),[items])
-          useEffect(()=>console.log(`items changed ${[...items]}`),[items])
-          useEffect(()=>console.log('added carpets triggered')
+          useEffect(()=>console.log(`items ------------`),[items])
+          useEffect(()=>setCarpets(items),[items])
+          useEffect(()=>console.log(`bill modified`),[billModified])
+          useEffect(()=>console.log('added carpets for bill triggered')
             ,[carpets])
             useEffect(()=>
             setHistory(()=>{
@@ -277,12 +357,19 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
             console.log('value changed')
             console.log(value)
            },[value])
-          useEffect(
-            ()=>console.log(`some inputs error ${error} check this items ${Object.keys(items)} items ${phone} name ${name} ` )
-            ,[error])
-            useEffect(()=>
-            setTotal(()=>items.reduce((acc, item) => acc + Number(item.t_price), 0))
+          useEffect(()=>{if(error){
+              console.log(`some inputs error ${error} check this items ${Object.keys(items)} items ${phone} name ${name} ` )
+            }}
+            ,[])
+            useEffect(()=>{
+            console.log('Hola items !!!!!!!!!!')
+            if(items){
+              console.log('CMON HERE')
+              setTotal(()=>items.reduce((acc, item) => acc + Number(item.t_price), 0))
+              
+            }}
             ,[items])
+            useEffect(()=>console.log('total come home'),[total])
          useEffect(()=>console.log('qty readded'),[qtyTemp])
          //00000000000000000000000000000000000000000000000000\
          useEffect(()=>{
@@ -290,10 +377,14 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
             carpets.map((x)=>console.log(`check ===>>${Object.keys(x)}`))
           }
          },[carpets])
+         useEffect(()=>console.log('mmm'),[discount])
+         
+         useEffect(()=>console.log('nnn'),[addition])
+
     return(
         <div className="bill-container">
           <div className='bill-title container-row'><h1>فاتورة جديدة</h1>
-          <button className='save-btn' onClick={addBill}>حفظ</button></div>
+          <button className='save-btn' onClick={()=>addBill() }> + حفظ</button></div>
           
           <div className="bill-inputs container-row">
                 <div className='input-row'>
@@ -394,7 +485,31 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     />
                   </p>
                   }
-                  
+                  <p>
+                    خصم
+                    <input
+                    type="number"
+                    min="0"
+                    placeholder="len"
+                    value={discount}
+                    onChange={(e)=>{
+                      setDiscount(()=>Number(e.target.value))
+                      
+                    }}
+                    step="1"
+                    />
+                  </p>
+                  <p>
+                    سرفلة
+                    <input
+                    type="number"
+                    min="0"
+                    placeholder="len"
+                    value={addition}
+                    onChange={(e)=>setAddition(()=>Number(e.target.value))}
+                    step="1"
+                    />
+                  </p>
                   <p><Error/></p>
                   <p>
                   <input
@@ -416,6 +531,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                       }
                    /> 
                   </p>  
+                  <button onClick={()=>setTotal((prev)=>Number(Number(prev)+(Number(addition))-Number(discount)))}>اضف خصم \ سرفلة</button>
                 </div>     
           </div>
           <div  className="print-area container-row">

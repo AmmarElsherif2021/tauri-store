@@ -68,30 +68,44 @@
 
 
 .save-btn{
-    position: absolute;
+    position: fixed;
     top:10%;
-    left:0;
+    left:1%;
+    background-color: rgb(34, 155, 99);
     border-radius: 20px;
     background-color: none;
+    width:8%;
+    border:solid black 2px;
 }
 
 .btn-primary{
     position: fixed;
-    top:70px;
-    left:20px;
+    top: 20%;
+    left:1%;
+    background-color: rgb(219, 54, 54);
+    border-radius: 20px;
+    width:8%;
+    border:solid black 2px;
 }
+
 .added{
-    border:2px solid black;
+    border:0.5px solid black;
+    margin-top:0;
+    margin-bottom: 0;
+    line-height:0.2em;
     background: none;
-    height:7mm;
+    
+    font-size: 8px;
+    text-align:center;
+    text-justify: distribute;
     overflow: hidden;
-    margin:0;
+    margin:0 auto;
     align-items:baseline;
 }
 .del-btn{
     background: white;
-    width:3mm;
-    height:5mm;
+    width:8px;
+    height:8px;
     border:1px solid black ;
     text-align: center;
     font-weight: 100;

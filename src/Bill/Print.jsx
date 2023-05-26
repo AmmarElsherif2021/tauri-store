@@ -94,17 +94,12 @@ export default function Print(props){
                     <div className="header-col"><small>الذوق الرفيع</small><small>{time.toLocaleTimeString()}</small><small>{date.toLocaleDateString()}</small></div>
                 </div>
                 
-                <hr />
-                
-                <hr />
-                
                 <div className="products p-2">
                     <table className="table table-borderless">
                         <tbody>
                             <tr className="add">
                                 <td>موديل</td>
                                 <td>عدد</td>
-                               
                                 <td>عرض</td>
                                 <td>طول</td>
                                 <td>سعر</td>
@@ -121,27 +116,14 @@ export default function Print(props){
                             })
                             
                             }
+                            <tr><td className="text-center">{`اجمالي  : ${props.total} `}</td></tr>
                         </tbody>
                     </table>
                 </div>
-                <hr />
-                <div className="products p-2">
-                    <table className="table table-borderless">
-                        <tbody>
-                            <tr className="add">
-                                
-                                
-                                <td className="text-center">اجمالي</td>
-                            </tr>
-                            <tr className="content">
-                                
-                                
-                                <td className="text-center">{props.total}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+         
+               
                 </div>
-                <hr />
+             
                 <div className="address p-2">
                     <table className="table table-borderless">
                         <tbody>
@@ -152,12 +134,12 @@ export default function Print(props){
                         </tbody>
                     </table>
                 </div>
-                <button className="btn btn-primary" onClick={printDocument}>Export To PDF</button>
+                <button className="btn-primary" onClick={printDocument}>طباعة</button>
             </div>
         </div>
     </div>
         </div>
         
         
-      </div>
+    
    )}

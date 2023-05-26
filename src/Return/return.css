@@ -1,0 +1,16 @@
+.return-home{
+    display:flex;
+    flex-direction: column;
+    align-items:stretch
+}
+.return-header{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    margin-left: 7%;
+}
+.returned-table{
+    width:90%;
+    margin-left:5%;
+    background-color: none;
+}
