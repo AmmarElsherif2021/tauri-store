@@ -18,6 +18,8 @@ export default function AddCarpet(){
   const [qty, setQty] = useState(1);
   const [type,setType]= useState('c')
   const [status, setStatus] = useState("");
+
+  const[errorClass,setErrorClass]=useState('status')
   //-changing function-------------------
    
   function handleChange(event) {
@@ -72,7 +74,7 @@ useEffect(()=>{
   setL(100);
   setT_price(()=>(0.0001*price_m).toFixed(0))
  },[type]);
- 
+ useEffect(()=>console.log('error alter'),[errorClass])
 //--------------------------------------------------------------
 
   async function addCarpet(event) {
@@ -103,13 +105,14 @@ useEffect(()=>{
       
     } catch (error) {
       setStatus(`Failed to add ${model} ${error}`);
+      setErrorClass('status-r')
     }
   }
 
   return (
     <div className='add_db'>
     
-    <div className='status'>
+    <div className={errorClass}>
      <p>
       {status}
      </p>
@@ -149,7 +152,7 @@ useEffect(()=>{
     </p>
   }
    {type!='o'?
-   <p>
+   <p className='o'>
    <p>
    عرض
   <input
@@ -157,7 +160,7 @@ useEffect(()=>{
     value={W}
     name='W'
     onChange={handleChange}
-    className='num'
+    className='num's
   />
   </p>
   
@@ -189,7 +192,7 @@ useEffect(()=>{
     />
     </p>
     <p>
-    النوع
+   
     <label htmlFor="my-select">اختر النوع</label>
       <select id="my-select" onChange={handleType}
          value={type}>

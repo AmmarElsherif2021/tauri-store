@@ -34,12 +34,12 @@ hr {
 .print-container{
     background: rgb(255, 255, 255);
     width:135mm;
-    min-height:100%;
+    min-height:220mm;
     overflow: auto;
     border:3px solid black;
-    position: absolute;
-    top:250px;
-    left:300px;
+    position: relative;
+    top:10%;
+    left:0%;
     padding: 2px;
 
 }

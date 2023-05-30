@@ -46,7 +46,7 @@ export default function Archive(){
         <th className='archive-cell'>-</th>
         </tr>
         </thead>
-        
+     
          <tbody>
          
          {data?.map(bill =>( <tr className='archive-item' key={bill.id}>
@@ -57,7 +57,7 @@ export default function Archive(){
             <td className='archive-cell'>{bill.history}</td>
             <td className='archive-cell'>{bill.total}</td>
             <td className='archive-cell archive-items-cell'>{bill.carpets && bill.carpets.map((x)=>`${x.model}-${x.reqQty}`)}</td>
-            <td className='archive-cell'><button onClick={()=>archiveDB.bills.delete(bill.id)}>-</button><button className='edit-btn' onClick={()=>handleClick(bill)}>edit</button></td>
+            <td className='archive-cell'><button className='edit-btn' onClick={()=>handleClick(bill)}>edit</button></td>
          </tr>))}
          </tbody>
         </table>

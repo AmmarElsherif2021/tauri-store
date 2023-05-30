@@ -1,16 +1,37 @@
 .return-home{
     display:flex;
     flex-direction: column;
-    align-items:stretch
+    align-items:stretch;
+    background: none;
+    justify-content: baseline;
+    margin-top: 5%;
+    min-height:95%;
 }
 .return-header{
     display:flex;
     flex-direction:row;
     justify-content:space-around;
     margin-left: 7%;
+    background: none;
 }
 .returned-table{
     width:90%;
     margin-left:5%;
     background-color: none;
+    background: none;
+}
+.return-btn{
+   background-color: rgb(231, 36, 36);
+   border-radius: 20px;
+    background-color: none;
+    width:8%;
+    border:solid black 2px;
+}
+.add-return-btn{
+  
+    background-color: rgb(34, 155, 99);
+    border-radius: 20px;
+    background-color: none;
+    width:8%;
+    border:solid black 2px;
 }

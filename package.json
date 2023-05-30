@@ -1,3 +1,4 @@
+
 {
   "name": "tauri-store",
   "private": true,
@@ -9,6 +10,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "bundle": "tauri build"
+
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",

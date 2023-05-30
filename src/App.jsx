@@ -4,7 +4,7 @@ import './App.css';
 //import Login from './Container/Login';
 import { BrowserRouter,Routes, Route,Link} from 'react-router-dom';
 import Dashboard from './Dashboard/Dashboard';
-
+import home from'./icons8-home-150.png'
 import Hello from './Hello/Hello'
 import Bill from './Bill/Bill';
 import ViewDB from './ViewDB/ViewDB';
@@ -29,7 +29,7 @@ function App() {
       <BrowserRouter>
 
         
-          <Link to="/Hello" > <button className='home-btn'>Home</button> </Link>
+          <Link to="/Hello" ><img className='home-btn' src={home}/></Link>
        
 
         <Routes>

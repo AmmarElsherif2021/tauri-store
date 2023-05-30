@@ -8,11 +8,14 @@
   "withGlobalTauri": false
   },
   "tauri": {
-    "allowlist": {
-      "shell": {
-        "all": true,
-        "execute": true
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true
       }
+    ],
+    "allowlist": {
+      "shell": {}
     },
   "bundle": {
   "active": true,

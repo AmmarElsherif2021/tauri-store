@@ -7,7 +7,6 @@ export default function Hero(){
       
     <div className='intro'>
     <Link to="/Hello" >
-    <h1>الذوق الرفيع</h1>
     <img src={avatar} className='avatar'/>
    </Link>
    <Outlet/>

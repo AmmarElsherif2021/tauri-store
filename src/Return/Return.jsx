@@ -126,7 +126,9 @@ export default function Return(){
          setSum(()=>{allRetuerned.reduce((acc, x) => acc + Number(x.returned)*Number(x.t_price), 0)})
 
         }
-      }}>اضف</button>
+      }}
+      className='add-return-btn'
+      >اضف</button>
     </div >
     <div className="return-body">
     <hr/>
@@ -170,6 +172,7 @@ export default function Return(){
         handleClear()
       }
     }
+    className='return-btn'
      >ارجاع</button>
     </div>
     </div>

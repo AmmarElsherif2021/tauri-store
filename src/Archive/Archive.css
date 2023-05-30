@@ -1,20 +1,39 @@
 .archive{
     margin:5%;
-    background:rgb(218, 218, 218);
+    margin-top:7%;
+    padding-bottom: 1%;
+    background:rgb(152, 184, 181);
     color:rgb(0, 0, 0);
     text-orientation: rtl;
+    
 }
 .archive-table{
-    width:100%;
+    width:98%;
     background: none;
     padding:2%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    margin-left:1%;
+    background-color: rgb(179, 204, 201);
+    border-radius: 8px;
 }
 .archive-item{
     width:100%;
+    margin-bottom: 15px;
 }
 .archive-cell{
     background-color: none;
     width:50px;
     width:5%;
     
+}
+.edit-btn{
+    background-color: rgb(34, 155, 99);
+    border-radius: 20px;
+    background-color: none;
+    min-width:10%;
+    min-height:7%;
+    border:solid black 2px;
+    margin:5px;
+    text-align: center;
 }

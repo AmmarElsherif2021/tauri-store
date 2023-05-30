@@ -4,7 +4,9 @@ import Card from "../layouts/Card";
 //import avatar from '../assets/avatar.png'
 import addBill from '../assets/add-bill.png'
 import history from '../assets/history.png'
+import r from '../assets/R.png'
 import addDatabase from '../assets/add-database.png'
+
 import { Link, Outlet } from "react-router-dom"
 import Hero from "./Hero/Hero";
 export default function Hello(){
@@ -46,7 +48,7 @@ export default function Hello(){
       id: 4,
       title: "Return",
       path: '/Return',
-      coverImg: history,
+      coverImg: r,
       sub:'مرتجع'
       
   }

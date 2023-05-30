@@ -22,4 +22,9 @@
   position:fixed;
   top:1%;
   left:1%;
+  width:5%;
+  margin:10px;
+  padding: 5px;
+  border-radius: 7px;
+  background: rgb(12, 197, 188) ;
 }
