@@ -1,8 +1,8 @@
 .archive{
     margin:5%;
-    margin-top:7%;
+    margin-top:10%;
     padding-bottom: 1%;
-    background:rgb(152, 184, 181);
+    background:none;
     color:rgb(0, 0, 0);
     text-orientation: rtl;
     
@@ -19,12 +19,16 @@
 }
 .archive-item{
     width:100%;
-    margin-bottom: 15px;
+    background-color: rgb(133, 170, 166);
+    border-bottom:3px solid black
+   
 }
 .archive-cell{
     background-color: none;
     width:50px;
     width:5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     
 }
 .edit-btn{

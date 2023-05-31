@@ -10,14 +10,19 @@ import validator from 'validator';
 export default function Return(){
   const[key,setKey]=useState()
   const[value,setValue]=useState()
-  const[returnedQty,setReturnedQty]=useState()
+  const[returnedQty,setReturnedQty]=useState(1)
   const[allRetuerned,setAllRetturned]=useState([])
   const[sum,setSum]=useState(0)
+  useEffect(()=>setValue((prevValue)=>({
+    ...prevValue,
+    returned:returnedQty
+  })),[value])
   
   const data = useLiveQuery(() => db.carpets.toArray(),[]);
   function handleClear(){
     setValue()
     setAllRetturned([])
+    setReturnedQty(1)
     setSum(0)
     setKey(0)
   }
@@ -31,8 +36,12 @@ export default function Return(){
           console.log(`handleUpdate called ${carpet.model}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`)
           if (carpet.type != "r") {
             carpet.qty=Number(carpet.qty)+Number(returnedQty)
+            
+            
           } else {
             carpet.L = Number(carpet.L)+ Number(returnedQty);
+            carpet.size=(Number(carpet.L)*Number(carpet.W)*0.0001).toFixed(2)
+            carpet.t_price=(Number(carpet.price_m)*Number(carpet.size)).toFixed(2)
           }
         });
       //console.log(`Carpet with id ${id} had their qty/len decremented`);
@@ -55,17 +64,23 @@ export default function Return(){
   useEffect(()=>{
     console.log('sum all !!!!!!!!!!')
     if(allRetuerned){
-      if(value && value.type=='r'){
-        setSum(()=>{allRetuerned.reduce((acc, x) => acc + Number(Number(x.returned)*Number(x.W)*Number(x.price_m)), 0)})
-      }else{
-       setSum(()=>{allRetuerned.reduce((acc, x) => acc + Number(x.returned)*Number(x.t_price), 0)})
-
-      }}},[allRetuerned])
+      let acc=0;
+      for(let i=0;i<allRetuerned.length;i++){
+        if(allRetuerned[i] && allRetuerned[i].type=='r'){
+          acc+=allRetuerned[i].returned*allRetuerned[i].price_m*allRetuerned[i].W*0.0001
+        }else{
+          acc+=allRetuerned[i].returned*allRetuerned[i].t_price
+        }
+        setSum(()=>acc) 
+      }
+      }},[allRetuerned])
   useEffect(()=>value&&console.log(`returned update ${Object.keys(value)}`),[value])
+  useEffect(()=>console.log(`returned update `),[returnedQty])
   
  
   return(
     <div className='return-home'>
+    <h1>اضافة مرتجع</h1>
     <div className='return-header'>
     <Autocomplete
     disablePortal={true}
@@ -93,7 +108,7 @@ export default function Return(){
         <input
         type="number"
         min="0"
-        placeholder="len"
+        placeholder="1"
         value={returnedQty}
         onChange={(e)=>setReturnedQty(()=>e.target.value)}
         step="1"
@@ -101,31 +116,40 @@ export default function Return(){
       </p>
       :
       <p>
-         كمية
+         عدد
         <input
         type="number"
         min="1"
         value={returnedQty}
-        onChange={(e)=>setReturnedQty(()=>e.target.value)}
-        placeholder="qty"
+        onChange={(e)=>setReturnedQty(()=>Number(e.target.value))}
+        placeholder="1"
         
         />
       </p>
       }
       <button onClick={()=>{
+       if(value && returnedQty){ 
+        
         setValue((prev)=>({
           ...prev,
           returned:returnedQty
 
         }))
         
-        setAllRetturned((prev)=>[...prev,value])
-        if(x.type=='r'){
+        if(value.returned){setAllRetturned((prev)=>[...prev,value])}else{
+          setReturnedQty(1)
+          setValue((prev)=>({
+            ...prev,
+            returned:returnedQty
+          }))
+
+        }
+        if(value.type=='r'){
           setSum(()=>{allRetuerned.reduce((acc, x) => acc + Number(Number(x.returned)*Number(x.W)*Number(x.price_m)), 0)})
         }else{
          setSum(()=>{allRetuerned.reduce((acc, x) => acc + Number(x.returned)*Number(x.t_price), 0)})
 
-        }
+        }}
       }}
       className='add-return-btn'
       >اضف</button>
@@ -145,7 +169,7 @@ export default function Return(){
       <tr>
       <td>{x.model}</td>
       <td>{x.returned}</td>
-      <td>{x.type=='r'? Number(x.returned)*Number(x.W)*Number(x.price_m):Number(x.returned)*Number(x.t_price)}</td>
+      <td>{x.type=='r'? 0.0001*Number(x.returned)*Number(x.W)*Number(x.price_m):Number(x.returned)*Number(x.t_price)}</td>
       <td><button className="del-btn" onClick={()=>{
         
         setAllRetturned((prev)=>prev.filter(c=>c.id!=x.id))
@@ -164,6 +188,7 @@ export default function Return(){
       
     </tbody>
     </table>
+    <hr/>
      <div><h4> {sum}  اجمالي </h4></div>
      <button
      onClick={

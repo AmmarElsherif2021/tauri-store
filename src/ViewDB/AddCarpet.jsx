@@ -24,8 +24,10 @@ export default function AddCarpet(){
    
   function handleChange(event) {
     const {name, value} = event.target
-    if(name=='W'){
-      setW(Number(value)) 
+    if(name==='W'){
+      setW(Number(value).toFixed(2)) 
+      setsize((W*L*0.0001).toFixed(2));
+      setT_price(()=>(size*price_m).toFixed(0))
       
     }
     if(name==='L'){
@@ -34,7 +36,7 @@ export default function AddCarpet(){
       setT_price(()=>(size*price_m).toFixed(0))
     }
     if(name==='price_m'){
-      setprice_m(Number(value))
+      setprice_m(Number(value).toFixed(0))
     }
     if(name==='qty'){
       setQty(Number(value))
@@ -42,12 +44,15 @@ export default function AddCarpet(){
    
 }
 //force update
+useEffect(()=>console.log('W changed'),[W])
+useEffect(()=>console.log('L changed'),[L])
   useEffect(()=>{
     setT_price(()=>(size*price_m).toFixed(0))},[price_m]);
   useEffect(()=>{
     setsize((W*L*0.0001).toFixed(2))
     setT_price(()=>(size*price_m).toFixed(0))
   },[L]);
+  
   useEffect(()=>{
     setsize((W*L*0.0001).toFixed(2))
     setT_price(()=>(size*price_m).toFixed(0))
@@ -134,6 +139,7 @@ useEffect(()=>{
       type="number"
       value={price_m}
       name='price_m'
+      min='0'
       onChange={
         handleChange
     }
@@ -148,19 +154,38 @@ useEffect(()=>{
       name='price_m'
       onChange={handleChange}
       className='num'
+      min='0'
+    />
+    <p>
+    الكمية
+    <input
+      type="number"
+      value={qty}
+      name='qty'
+      onChange={(e)=>{
+        setQty(()=>e.target.value);
+      }}
+      className='num'
+      min='0'
     />
     </p>
+    </p>
+    
   }
-   {type!='o'?
-   <p className='o'>
+   {type!='o' &&
+   
    <p>
+   { type!='r' &&
+   <p>
+   <p className='o'>
    عرض
   <input
     type="number"
     value={W}
     name='W'
     onChange={handleChange}
-    className='num's
+    className='num'
+    min='0'
   />
   </p>
   
@@ -172,25 +197,59 @@ useEffect(()=>{
     name='L'
     onChange={handleChange}
     className='num'
+    min='0'
+  />
+  </p>
+  <p>
+  الكمية
+  <input
+    type="number"
+    value={qty}
+    name='qty'
+    onChange={(e)=>{
+      setQty(()=>e.target.value);
+    }}
+    className='num'
+    min='0'
   />
   </p>
    </p>
-   :
-   <p></p>
+}
+   
+  {type=='r' &&
+  <p>
+  <p className='o'>
+   
+  عرض
+  <select onChange={handleChange} name='W' value={W}>
+  <option value="0">0</option>
+  <option value="60">60</option>
+  <option value="80">80</option>
+  <option value="100">100 </option>
+  <option value="120">120</option>
+  <option value="150">150</option>
+  <option value="200">200</option>
+  </select>
+  <p>{W}</p>
+ </p>
+ 
+ <p>
+ طول
+ <input
+   type="number"
+   value={L}
+   name='L'
+   onChange={handleChange}
+   className='num'
+   min='0'
+ />
+ </p>
+  </p>
+  }
+  </p>
   } 
  
-    <p>
-    الكمية
-    <input
-      type="number"
-      value={qty}
-      name='qty'
-      onChange={(e)=>{
-        setQty(()=>e.target.value);
-      }}
-      className='num'
-    />
-    </p>
+
     <p>
    
     <label htmlFor="my-select">اختر النوع</label>

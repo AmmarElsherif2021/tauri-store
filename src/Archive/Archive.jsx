@@ -57,7 +57,7 @@ export default function Archive(){
             <td className='archive-cell'>{bill.history}</td>
             <td className='archive-cell'>{bill.total}</td>
             <td className='archive-cell archive-items-cell'>{bill.carpets && bill.carpets.map((x)=>`${x.model}-${x.reqQty}`)}</td>
-            <td className='archive-cell'><button className='edit-btn' onClick={()=>handleClick(bill)}>edit</button></td>
+            <td className='archive-cell'><button className='edit-btn' onClick={()=>handleClick(bill)}>طباعة</button></td>
          </tr>))}
          </tbody>
         </table>

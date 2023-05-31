@@ -45,7 +45,7 @@
 }
 .add-btn{
     margin:10px;  
-    width:100px;
+    width:60px;
     height:60px; 
    }
 .bill-inputs{
@@ -90,7 +90,7 @@
     position: fixed;
     top:15%;
     left:1%;
-    background-color: rgb(34, 155, 99);
+    background-color: rgb(40, 185, 117);
     border-radius: 20px;
     background-color: none;
     width:7%;
@@ -113,7 +113,7 @@
     position: fixed;
     top: 25%;
     left:1%;
-    background-color: rgb(219, 54, 54);
+    background-color: rgb(247, 80, 80);
     border-radius: 20px;
     width:7%;
     height:7%;

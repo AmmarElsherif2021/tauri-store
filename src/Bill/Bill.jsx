@@ -475,7 +475,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     />
                   </p>
                   }
-                <button className="add-btn btn" onClick={handleAdd}>Add</button>
+                <button className="add-btn btn" onClick={handleAdd}>+</button>
                   
                 </div>
                 
