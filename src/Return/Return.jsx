@@ -169,7 +169,7 @@ export default function Return(){
       <tr>
       <td>{x.model}</td>
       <td>{x.returned}</td>
-      <td>{x.type=='r'? 0.0001*Number(x.returned)*Number(x.W)*Number(x.price_m):Number(x.returned)*Number(x.t_price)}</td>
+      <td>{x.type=='r'?Number( 0.0001*Number(x.returned)*Number(x.W)*Number(x.price_m)).toFixed(0):Number(Number(x.returned)*Number(x.t_price)).toFixed(0)}</td>
       <td><button className="del-btn" onClick={()=>{
         
         setAllRetturned((prev)=>prev.filter(c=>c.id!=x.id))

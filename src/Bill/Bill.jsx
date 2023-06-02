@@ -95,40 +95,41 @@ async function deleteRecord(id) {
 }
 //useEffect(()=>deleteRecord(1),[])
 
-// async function handleUpdate(id) {
-//   try {
-//     await db.carpets
-//       .where("id")
-//       .equals(id)
-//       .modify(async (carpet) => {
-//         const added = carpets.find((item )=> item.id === carpet.id);
-//         console.log(`handleUpdate called ${carpet.model}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`)
-//         if (carpet.type != "r") {
-//           console.log(`req qty: ${added.reqQty}`)
-//           if (carpet.qty >= added.reqQty) {
-//             carpet.qty -= added.reqQty;
-//             console.log(`Carpet qty updated: ${carpet.qty}`);
-//           } else{
-//             console.log(`carpet.qty >${carpet.qty} added.reqQty> ${carpet.qty}id${id}`)
-//             await db.carpets.delete(carpet.id).catch((err) => console.error(`An error occurred while deleting carpet with id ${id}: ${err}`));
-//             console.log(`Carpet with id ${id} was deleted`);
-//           }
-//         } else {
-//           if (carpet.L >= added.reqLen) {
-//             carpet.L -= added.reqLen;
-//             console.log(`Carpet with id ${id} was trimmed`);
-//           } else {
+async function handleUpdate(id) {
+  try {
+    await db.carpets
+      .where("id")
+      .equals(id)
+      .modify(async (carpet) => {
+        const added = carpets.find((item )=> item.id === carpet.id);
+        console.log(`handleUpdate called ${carpet.model}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`)
+        if (carpet.type != "r") {
+          console.log(`req qty: ${added.reqQty}`)
+          if (carpet.qty >= added.reqQty) {
+            carpet.qty -= added.reqQty;
+            console.log(`Carpet qty updated: ${carpet.qty}`);
+          } else{
+            console.log(`carpet.qty >${carpet.qty} added.reqQty> ${carpet.qty}id${id}`)
+            await db.carpets.delete(carpet.id).catch((err) => console.error(`An error occurred while deleting carpet with id ${id}: ${err}`));
+            console.log(`Carpet with id ${id} was deleted`);
+          }
+        } else {
+          if (carpet.L >= added.reqLen) {
+            carpet.L -= added.reqLen;
+            carpet.t_price=Number(Number(carpet.price_m)*Number(carpet.L)*Number(carpet.W)).toFixed(0)
+            console.log(`Carpet with id ${id} was trimmed`);
+          } else {
             
-//             await db.carpets.delete(carpet.id).catch((err) => console.error(`An error occurred while deleting carpet with id ${id}: ${err}`));
-//             console.log(`Carpet with id ${id} was deleted`);
-//           }
-//         }
-//       });
-//     //console.log(`Carpet with id ${id} had their qty/len decremented`);
-//   } catch (err) {
-//     console.error(`An error occurred while updating carpet with id ${id}: ${err}`);
-//   }
-// }
+            await db.carpets.delete(carpet.id).catch((err) => console.error(`An error occurred while deleting carpet with id ${id}: ${err}`));
+            console.log(`Carpet with id ${id} was deleted`);
+          }
+        }
+      });
+    //console.log(`Carpet with id ${id} had their qty/len decremented`);
+  } catch (err) {
+    console.error(`An error occurred while updating carpet with id ${id}: ${err}`);
+  }
+}
 
 async function addBill() {
   try {
@@ -148,7 +149,7 @@ async function addBill() {
         `Bill name: ${name}, total: ${total}, carpets: ${carpets} successfully added. Got id: ${id}`
     );
     console.log(`carpets to update in DB:${carpets.length}`)
-    carpets.map((x) => console.log(x.model))
+    items.map((x) => handleUpdate(x.id))
    
       
     
@@ -177,11 +178,11 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
 //States needed in your bill:
     //carpets
     
-    // function returnBack(bid){
-    //   setItems((prevItems)=>prevItems.filter(item => item.id !== bid)) 
-    //   setCarpetsjsx((prevItems)=>prevItems.filter(item => item.props.val.id !== bid))
-    //   handleClear() 
-    // }
+    function returnBack(bid){
+      setItems((prevItems)=>prevItems.filter(item => item.id !== bid)) 
+      setCarpetsjsx((prevItems)=>prevItems.filter(item => item.props.val.id !== bid))
+      handleClear() 
+    }
     const Carpet=(props)=>(
       <tr className="added" key={props.val.id}>
         <td>{props.val.model}</td>
@@ -189,6 +190,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
         <td>{props.val.W}</td>
         <td>{props.val.type=='r'?props.val.reqLen:props.val.L}</td>
         <td>{props.val.t_price}</td>
+        <td><button onClick={()=>returnBack(props.val.id)}>-</button></td>
         
       
       </tr>                        
@@ -230,10 +232,12 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   
             }
             useEffect(()=>console.log(`added carpet len ${carpets.length}`),[carpets])
-            //Handle add one carpet
+            
+            
+            //Handle add one carpet|||||||||||||||||||||||||||||||||||||||||||||||||||||||||
             function handleAdd(){
               
-                if(value &&value.type !='r' && value.reqQty<=value.qty){
+                if(value &&value.t_price &&value.type !='r' && value.reqQty<=value.qty){
                   console.log(`####### items: ${items} - ${Object.keys(value)}`)
                   setItems((prevItems)=>prevItems.filter((x)=>x.id!=value.id))
                   setValue((prevValue)=>({
@@ -254,14 +258,14 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   //console.log(`carpets len ${carpets.length}`)
                   handleClear()
                   
-                }else if(value && value.type=='r' && value.reqLen<=value.L){
-                  setItems((prevItems)=>prevItems.filter((x)=>x.id!=value.id))
+                }else if(value &&value.t_price && value.type=='r' && value.reqLen+qtyTemp<=value.L){
+                  //setItems((prevItems)=>prevItems.filter((x)=>x.id!=value.id))
                   setValue((prevValue)=>({
                     ...prevValue,
                     reqLen:Number(prevValue.reqLen)+qtyTemp,
                     t_price:(Number(prevValue.W)*0.0001*(Number(prevValue.reqLen))*Number(prevValue.price_m)).toFixed(0),
                     }))
-                  setCarpetsjsx((prevCarpets)=>prevCarpets.filter((x)=>x.key!=value.id))
+                  //setCarpetsjsx((prevCarpets)=>prevCarpets.filter((x)=>x.key!=value.id))
                   setCarpetsjsx((prevCarpets)=>[...prevCarpets,<Carpet key={value.id} val={value} />])
                   //setTotal(()=>items.reduce((acc, item) => acc + Number(item.t_price), 0))
                   
@@ -407,7 +411,9 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                           )
                         )
                       }else{
-                        setQtyTemp(()=>Number(result.reqLen))
+
+                        setQtyTemp(()=>items.reduce((acc, item) =>item.id==v.id && acc + Number(item.reqLen), 0))
+                        
                         setValue((prevValue)=>(
                           {
                             ...prevValue,
@@ -415,7 +421,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                             //qty: Number(prevValue.qty)-Number(prevValue.reqQty),
                             //reqLen:prevValue.reqLen,
                             t_price:Number(prevValue.W)*Number(qtyTemp)*0.0001*Number(prevValue.price_m),
-                            reqLen:prevValue.reqLen,
+                            //reqLen:prevValue.reqLen,
                             
                           }
                          ))
@@ -504,7 +510,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     <input
                     type="number"
                     min="0"
-                    placeholder="len"
+                    placeholder="0"
                     value={discount}
                     onChange={(e)=>{
                       setDiscount(()=>Number(e.target.value))
@@ -518,7 +524,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     <input
                     type="number"
                     min="0"
-                    placeholder="len"
+                    placeholder="0"
                     value={addition}
                     onChange={(e)=>setAddition(()=>Number(e.target.value))}
                     step="1"

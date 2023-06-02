@@ -30,7 +30,7 @@ export default function Hello(){
     {
         id: 2,
         title: "Add new carpet",
-        path:'/ViewDB',
+        path:'/Login',
         coverImg: addDatabase,
         sub:'صنف جديد'
         
