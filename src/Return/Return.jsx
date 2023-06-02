@@ -128,7 +128,7 @@ export default function Return(){
       </p>
       }
       <button onClick={()=>{
-       if(value && returnedQty){ 
+       if(value.model && returnedQty){ 
         
         setValue((prev)=>({
           ...prev,

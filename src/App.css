@@ -20,10 +20,10 @@
 }
 .home-btn{
   position:fixed;
-  top:10%;
-  left:1%;
+  top:5%;
+  left:2%;
   width:5%;
-  margin:10px;
+  margin:10;
   padding: 5px;
   border-radius: 7px;
   background: rgb(12, 197, 188) ;

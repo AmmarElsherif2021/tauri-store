@@ -381,7 +381,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
     return(
         <div className="bill-container">
           <div className='bill-title container-row'><h1>فاتورة جديدة</h1>
-          <button className='save-bill-btn' onClick={()=>addBill() }>+ حفظ</button></div>
+          <button className='save-bill-btn' onClick={()=>{if(carpetsjsx.length>0){addBill()} }}>+ حفظ</button></div>
           
           <div className="bill-inputs container-row">
                 <div className='input-row'>
@@ -431,7 +431,6 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                       setValue((prevValue)=>(
                         {
                           ...prevValue,
-                         
                           reqLen:0,
                           t_price:0,
                           reqQty:0
@@ -475,8 +474,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     />
                   </p>
                   }
-                <button className="add-btn btn" onClick={handleAdd}>+</button>
-                  
+                <button className="add-btn btn" onClick={handleAdd}>+</button>  
                 </div>
                 
                 

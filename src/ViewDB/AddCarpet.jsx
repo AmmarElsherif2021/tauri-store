@@ -83,7 +83,7 @@ useEffect(()=>{
 //--------------------------------------------------------------
 
   async function addCarpet(event) {
-    event.preventDefault()
+   // event.preventDefault()
     try {
 
       // Add the new Carpet!
@@ -267,7 +267,7 @@ useEffect(()=>{
       <p>{t_price} اجمالي السعر</p>
       
     
-    <button onClick={addCarpet} className='btn'>
+    <button onClick={(e)=>{if(model){addCarpet(e.target.value)}}} className='btn'>
       أضف
     </button>
    

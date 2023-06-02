@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import Dexie from 'dexie';
+//import { dbPath, port } from '../enviornment'
+
+// ...
 
 
 export const db = new Dexie('myDatabase');
