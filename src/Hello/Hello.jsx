@@ -47,7 +47,7 @@ export default function Hello(){
     {
       id: 4,
       title: "Return",
-      path: '/Return',
+      path: '/Login2',
       coverImg: r,
       sub:'مرتجع'
       

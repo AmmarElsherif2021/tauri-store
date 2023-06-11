@@ -144,6 +144,7 @@ useEffect(()=>{
         handleChange
     }
       className='num'
+      placeholder='جنيه'
     />
     </p>:
     <p>
@@ -155,6 +156,7 @@ useEffect(()=>{
       onChange={handleChange}
       className='num'
       min='0'
+      placeholder='جنيه'
     />
     <p>
     الكمية
@@ -167,6 +169,7 @@ useEffect(()=>{
       }}
       className='num'
       min='0'
+      placeholder='وحدة'
     />
     </p>
     </p>
@@ -186,7 +189,9 @@ useEffect(()=>{
     onChange={handleChange}
     className='num'
     min='0'
+    placeholder='سم'
   />
+  <small>سم</small>
   </p>
   
   <p>
@@ -198,7 +203,9 @@ useEffect(()=>{
     onChange={handleChange}
     className='num'
     min='0'
+    placeholder='سم'
   />
+  <small>سم</small>
   </p>
   <p>
   الكمية
@@ -211,6 +218,7 @@ useEffect(()=>{
     }}
     className='num'
     min='0'
+    placeholder='وحدة'
   />
   </p>
    </p>
@@ -231,6 +239,7 @@ useEffect(()=>{
   <option value="200">200</option>
   </select>
   <p>{W}</p>
+  <small>سم</small>
  </p>
  
  <p>
@@ -242,7 +251,9 @@ useEffect(()=>{
    onChange={handleChange}
    className='num'
    min='0'
+   placeholder='سم'
  />
+ <small>سم</small>
  </p>
   </p>
   }
@@ -262,9 +273,13 @@ useEffect(()=>{
 
     </p>
     
-      <p>{size} مساحة</p><br/>
+      <p>{size} مساحة</p>
+      <small>2م</small>
+      <br/>
       
       <p>{t_price} اجمالي السعر</p>
+      <small>جنيه</small>
+      
       
     
     <button onClick={(e)=>{if(model){addCarpet(e.target.value)}}} className='btn'>

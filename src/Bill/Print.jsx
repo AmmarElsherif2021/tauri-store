@@ -84,8 +84,8 @@ export default function Print(props){
             <div className="bill-card">
                 <div className="header-row">
                     <div className="header-col"> 
-                    <small>{props.agent}:اسم العميل </small>
-                    <small>{props.phone}:تليفون</small>
+                    <small>اسم العميل : {props.agent}</small>
+                    <small>تليفون :{props.phone}</small>
                     
                     
                      </div>

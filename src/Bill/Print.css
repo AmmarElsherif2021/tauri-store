@@ -64,3 +64,6 @@ hr {
 .content{
     margin:0;
 }
+.bill-card{
+    text-orientation: rtl;
+}

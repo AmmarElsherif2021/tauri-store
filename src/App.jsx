@@ -13,6 +13,7 @@ import ViewDB from './ViewDB/ViewDB';
 import Archive from './Archive/Archive';
 import Return from './Return/Return';
 import Login from './Login/Login';
+import Login2 from './Login2/Login2';
 //import Preferences from './Preferences/Preferences';
 import Hero from './Hello/Hero/Hero';
 
@@ -38,6 +39,7 @@ function App() {
     <Route exact path="Hello" element={<Hello/>}/>
     <Route path="Bill" element={<Bill/>}/>
     <Route path="Login" element={<Login/>}/>
+    <Route path="Login2" element={<Login2/>}/>
     <Route path="ViewDB" element={<ViewDB/>}/>
     <Route path="Archive" element={<Archive/>}/>
     <Route path="Return" element={<Return/>}/>

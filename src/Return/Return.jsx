@@ -113,6 +113,7 @@ export default function Return(){
         onChange={(e)=>setReturnedQty(()=>e.target.value)}
         step="1"
         />
+        <small>سم</small>
       </p>
       :
       <p>
