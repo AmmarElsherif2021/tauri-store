@@ -14,12 +14,16 @@
     margin-top: 4%;
     margin-bottom: 4%;
     margin-left:1%;
-    background-color: rgb(179, 204, 201);
+    background-color: #59ba83;
     border-radius: 8px;
+}
+.search-bill{
+    min-width:250px;
+    border:2px solid black;
 }
 .archive-item{
     width:100%;
-    background-color: rgb(133, 170, 166);
+    background-color: #4c9b6e;
     border-bottom:3px solid black
    
 }
@@ -32,7 +36,7 @@
     
 }
 .edit-btn{
-    background-color: rgb(34, 155, 99);
+    background-color: rgb(204, 75, 43);
     border-radius: 20px;
     background-color: none;
     min-width:10%;

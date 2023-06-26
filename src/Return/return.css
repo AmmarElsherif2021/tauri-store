@@ -24,7 +24,6 @@
 .return-btn{
    background-color: rgb(231, 36, 36);
    border-radius: 20px;
-    background-color: none;
     width:8%;
     border:solid black 2px;
 }
@@ -35,4 +34,12 @@
     background-color: none;
     width:8%;
     border:solid black 2px;
+}
+.del-returned{
+    width:40px;
+    height:10px;
+    text-align: center;
+    margin:2px;
+    background-color: rgb(221, 92, 92);
+    border:black 2px solid
 }

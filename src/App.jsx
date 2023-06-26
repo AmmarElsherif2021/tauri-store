@@ -1,4 +1,9 @@
 //check for: https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
+//Things To do:
+//1- add search and edit on DB items
+//2- add worker-timing instance to the system
+//3- prevent saving before printing
+
 import {React, useState} from 'react';
 import './App.css';
 //import Login from './Container/Login';
@@ -31,7 +36,7 @@ function App() {
     <div className="app">
     
     <BrowserRouter>
-    <div>
+    <div className="welcome">
       <Link to="/Hello" ><img className='home-btn' src={home}/></Link>
     </div>
     <Routes>

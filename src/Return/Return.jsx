@@ -171,7 +171,7 @@ export default function Return(){
       <td>{x.model}</td>
       <td>{x.returned}</td>
       <td>{x.type=='r'?Number( 0.0001*Number(x.returned)*Number(x.W)*Number(x.price_m)).toFixed(0):Number(Number(x.returned)*Number(x.t_price)).toFixed(0)}</td>
-      <td><button className="del-btn" onClick={()=>{
+      <td><button className="del-returned" onClick={()=>{
         
         setAllRetturned((prev)=>prev.filter(c=>c.id!=x.id))
         
@@ -183,7 +183,7 @@ export default function Return(){
         }
         
         
-      }}><h3>-</h3></button></td>
+      }}></button></td>
       </tr>
       )})}
       

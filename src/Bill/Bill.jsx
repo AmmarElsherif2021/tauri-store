@@ -190,7 +190,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
         <td>{props.val.W}</td>
         <td>{props.val.type=='r'?props.val.reqLen:props.val.L}</td>
         <td>{props.val.t_price}</td>
-        <td><button onClick={()=>returnBack(props.val.id)}>-</button></td>
+        <td><div className='del-item' onClick={()=>returnBack(props.val.id)}>-</div></td>
         
       
       </tr>                        
@@ -341,13 +341,16 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
           useEffect(()=>console.log('added carpets for bill triggered')
             ,[carpets])
             useEffect(()=>
-            setHistory(()=>{
+            setHistory(() => {
               const date = new Date();
               const day = date.getDate();
+              const month = date.getMonth() + 1;
+              const year = date.getFullYear();
               const hour = date.getHours();
               const minute = date.getMinutes();
-              return`${day}-${hour}-${minute}`
+              return `${day}-${month}-${year} ${hour}:${minute}`;
             })
+            
             ,[carpets])
           useEffect(()=>{
             console.log('value changed')
@@ -480,7 +483,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     />
                   </p>
                   }
-                <button className="add-btn btn" onClick={handleAdd}>+</button>  
+                <button className="add-btn " onClick={handleAdd}>+</button>  
                 </div>
                 
                 
@@ -530,10 +533,16 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                     step="1"
                     />
                   </p>
+                  <p>{addition-discount}</p>
                   <p><Error/></p>
                  
                   <button 
-                  onClick={()=>setTotal((prev)=>Number(Number(prev)+(Number(addition))-Number(discount)))}
+                  onClick={()=>{
+                    setTotal((prev)=>Number(Number(prev)+(Number(addition))-Number(discount)))
+                    setAddition(0) 
+                    setDiscount(0)
+                    } 
+                  }
                   className='add-service'
                   >
                   اضف خصم \ سرفلة

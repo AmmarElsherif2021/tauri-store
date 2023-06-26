@@ -16,6 +16,8 @@ import { useState , useEffect } from 'react';
 export default function Print(props){
     
     function printDocument(){
+        
+        
         let component = document.getElementById('divToPrint');
                     // Create a new jsPDF document with page size set to A5
                     let doc = new jsPDF('p', 'mm', 'a5');

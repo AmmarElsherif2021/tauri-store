@@ -23,7 +23,11 @@ const useAuth = () => {
 };
 
     const data = useLiveQuery(() => db.carpets.toArray(), []);
-    
+    //search
+const [searchTerm, setSearchTerm] = useState('');
+const filteredData = data?.filter((carpet) =>
+    carpet.model?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
    
      
     function handleDelete(){
@@ -41,29 +45,42 @@ const useAuth = () => {
         <div className="view-db">
           <div className="avatar"><img src={avatar} className="avatar-img"/></div>
           <br/>
+          <input
+        className="search-bill"
+        type="text"
+        placeholder="ابحث باسم السجادة"
+        onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <div className='add-carpet' >
             <AddCarpet/>
           </div>
-          <div className="table">
-            <div className='item table-header'>
-              <p className='cell txt-cell table-header'>موديل</p>
-              <p className='cell txt-cell table-header'>النوع</p>
-              <p className='cell table-header'>مساحة</p>
-              <p className='cell table-header'>السعر</p>
-              <p className='cell table-header'>الكمية</p>
-              <p className="minus-btn table-header"></p>
-            </div>
-            {data?.map(carpet => (
-              <div className='item' key={carpet.id}>
-                <p className='cell txt-cell'>{carpet.model}</p>
-                <p className='cell'>{carpet.type}</p>
-                <p className='cell'>{Number(carpet.W * carpet.L * 0.0001).toFixed(2)}</p>
-                <p className='cell'>{Number(carpet.price_m*carpet.W * carpet.L * 0.0001).toFixed(0)}</p>
-                <p className='cell'>{carpet.qty}</p>
+          <table className="table">
+            <thead className='item table-header'>
+              <th className='cell txt-cell table-header'>موديل</th>
+              <th className='cell txt-cell table-header'>النوع</th>
+              <th className='cell table-header'>مساحة</th>
+              <th className='cell table-header'>السعر</th>
+              <th className='cell table-header'>الكمية</th>
+              <th className="minus-btn table-header"></th>
+            </thead>
+            <tbody>
+            {filteredData?.map(carpet => (
+              <tr className='item' key={carpet.id}>
+                <td className='cell txt-cell'>{carpet.model}</td>
+                <td className='cell'>{carpet.type}</td>
+                <td className='cell'>{Number(carpet.W * carpet.L * 0.0001).toFixed(2)}</td>
+                <td className='cell'>{Number(carpet.price_m*carpet.W * carpet.L * 0.0001).toFixed(0)}</td>
+                <td className='cell'>{carpet.qty}</td>
+                <td>
                 <button className='minus-btn' onClick={() => db.carpets.delete(carpet.id)}>-</button>
-              </div>
-            ))}
-          </div>
+                </td>
+                
+              </tr>
+            ))
+          }
+            </tbody>
+            
+          </table>
         </div>
       );
     }
