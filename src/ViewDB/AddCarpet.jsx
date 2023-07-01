@@ -283,7 +283,7 @@ useEffect(()=>{
       
     
     <button onClick={(e)=>{if(model){addCarpet(e.target.value)}}} className='btn'>
-      أضف
+      +
     </button>
    
     </div>

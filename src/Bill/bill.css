@@ -2,7 +2,7 @@
 .bill-container{
     width:100%;
     text-orientation: rtl;
-   
+    background:none;
     padding-top: 3%;
     padding-right:5%;
     padding-left:5%;
@@ -13,9 +13,13 @@
 
     
 }
+.bill-input{
+  width:150px;
+}
 .container-row{
     background:none;
     width:100%;
+    margin-left:150px;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -28,8 +32,8 @@
   
 }
 .txt-field{
-   min-width:500px;
-   background: white;
+   max-width:400px;
+   background: rgb(255, 255, 255);
 }
 .error{
     color:rgb(255, 255, 255);
@@ -37,7 +41,7 @@
     margin:3px;
 }
 .auto-complete{
-    min-width: 700px;
+    max-width: 450px;
     padding:8px;
     background-color:white;
     border:2px solid black;
@@ -53,7 +57,8 @@
 .bill-inputs{
     
     min-height:150px;
-    
+    position: relative;
+    left:50px;
    
     display:flex;
     flex-direction: column;
@@ -61,9 +66,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    padding-left:4%;
-    padding-right:4%;
-    width:90%;
+    padding-left:1%;
+    padding-right:1%;
+    width:80%;
+    min-width: 700px;
     margin-top: 1%;
 }
 .input-row{
@@ -96,10 +102,11 @@
     background-color: rgb(40, 185, 117);
     border-radius: 20px;
     background-color: none;
-    width:7%;
-    min-height:7%;
+    width:70px;
+    height:40px;
+   
     border:solid black 2px;
-    max-height: 5%;
+ 
     text-align: center;
 }
 .add-service{
@@ -118,8 +125,8 @@
     left:1%;
     background-color: rgb(247, 80, 80);
     border-radius: 20px;
-    width:7%;
-    height:7%;
+    width:70px;
+    height:40px;
     border:solid black 2px;
   
  

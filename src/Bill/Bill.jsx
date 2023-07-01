@@ -186,7 +186,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
     const Carpet=(props)=>(
       <tr className="added" key={props.val.id}>
         <td>{props.val.model}</td>
-        <td>{props.val.reqQty}</td>
+        {props.val.type!='r'?<td>{props.val.reqQty}</td>:<td>{1}</td>}
         <td>{props.val.W}</td>
         <td>{props.val.type=='r'?props.val.reqLen:props.val.L}</td>
         <td>{props.val.t_price}</td>
@@ -208,6 +208,8 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
     //clear Autocomplete after adding
       const [value, setValue] = useState(null);
       const [total,setTotal]=useState(0);
+      const [total1,setTotal1]=useState(total);
+      
       const [key, setKey] = useState(0);
     
 
@@ -366,8 +368,18 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
               console.log('CMON HERE')
               setTotal(()=>items.reduce((acc, item) => acc + Number(item.t_price), 0))
               
+              
             }}
             ,[items])
+            useEffect(()=>{
+              console.log('Hola items !!!!!!!!!!')
+              if(items){
+                console.log('CMON HERE')
+                
+                setTotal1(()=>items.reduce((acc, item) => acc + Number(item.t_price), 0)+Number(addition)-Number(discount))
+                
+              }}
+              ,[addition,discount])
             useEffect(()=>console.log('total come home'),[total])
          useEffect(()=>console.log('qty readded'),[qtyTemp])
          //00000000000000000000000000000000000000000000000000\
@@ -388,7 +400,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
     return(
         <div className="bill-container">
           <div className='bill-title container-row'><h1>فاتورة جديدة</h1>
-          <button className='save-bill-btn' onClick={()=>{if(carpetsjsx.length>0){addBill()} }}>+ حفظ</button></div>
+          <button className='save-bill-btn' onClick={()=>{if(carpetsjsx.length>0){addBill()} }}>حفظ</button></div>
           
           <div className="bill-inputs container-row">
                 <div className='input-row'>
@@ -462,6 +474,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   <p>
                     طول
                     <input
+                    className="bill-input"
                     type="number"
                     min="0"
                     placeholder="len"
@@ -474,6 +487,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   <p>
                      كمية
                     <input
+                    className="bill-input"
                     type="number"
                     min="1"
                     
@@ -490,6 +504,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                 <div className='input-row'>
                 <p>
                 <input
+                className="bill-input"
                 type="text"
                 placeholder="الاسم"
                 onChange={(e)=>setName(()=>e.target.value)}
@@ -497,6 +512,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                 </p>
                 <p>
                 <input
+                className="bill-input"
                 type="tel"
                 placeholder="تليفون"
                 onChange={(e)=>{
@@ -511,6 +527,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   <p>
                     خصم
                     <input
+                    className="bill-input"
                     type="number"
                     min="0"
                     placeholder="0"
@@ -525,6 +542,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                   <p>
                     سرفلة
                     <input
+                    className="bill-input"
                     type="number"
                     min="0"
                     placeholder="0"
@@ -538,7 +556,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                  
                   <button 
                   onClick={()=>{
-                    setTotal((prev)=>Number(Number(prev)+(Number(addition))-Number(discount)))
+                    setTotal1((prev)=>Number(prev+(Number(addition))-Number(discount)))
                     setAddition(0) 
                     setDiscount(0)
                     } 
@@ -550,7 +568,7 @@ const data = useLiveQuery(() => db.carpets.toArray(),[]);
                 </div>     
           </div>
           <div  className="print-area container-row">
-          <Print key={()=>uuidv4()} agent={name} phone={phone} total={total}  carpetsQ={carpetsjsx} />
+          <Print key={()=>uuidv4()} agent={name} phone={phone} total={total}  carpetsQ={carpetsjsx} addition={addition} discount={discount} total1={total1} />
           </div>
         </div>)
 }

@@ -118,7 +118,10 @@ export default function Print(props){
                             })
                             
                             }
-                            <tr><td className="text-center">{`اجمالي  : ${props.total} `}</td></tr>
+                            <tr><td className="text-center">{` مجموع  : ${props.total} `}</td></tr>
+                            <tr><td className="text-center">{`خصم  : ${props.discount} سرفلة  : ${props.addition} `}</td></tr>
+                            <hr/>
+                            <tr><td className="text-center">{`اجمالي  : ${props.total1} `}</td></tr>
                         </tbody>
                     </table>
                 </div>

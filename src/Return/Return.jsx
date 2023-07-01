@@ -94,7 +94,7 @@ export default function Return(){
           setValue(result)}}}
     getOptionLabel={(option) =>{
     
-        return `${option.model}`
+        return `${option.model}-W ${option.W}- L ${option.L}`
     }
     }
     className="auto-complete"
